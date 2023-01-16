@@ -13,7 +13,7 @@ import java.util.Vector;
 
 import javax.swing.*;
 
-import ProJect.ProJectMain;
+
 
 public class Team extends JFrame {
 
@@ -26,6 +26,7 @@ public class Team extends JFrame {
 	private Vector<String> v = new Vector<String>();
 	private Vector<String> v1 = new Vector<String>();
 	private JList<String> member1JList = new JList<String>(v);
+	
 
 	private JLabel la1 = new JLabel();
 	private JLabel la2 = new JLabel();
@@ -72,7 +73,7 @@ public class Team extends JFrame {
 							new FileReader("C:\\Users\\tj-bu-12\\Desktop\\" + Item + ".txt")); // 불러올 파일이름
 					v.clear();
 					while ((str = br.readLine()) != null) {
-
+						
 						v.add(str + "\n");
 						member1JList.setListData(v);
 
@@ -89,6 +90,7 @@ public class Team extends JFrame {
 		});
 		MyMouseListener listener = new MyMouseListener();
 		member1JList.addMouseListener(listener);
+		
 		
 		cen.setLayout(new GridLayout(2, 1));
 		cen.setOpaque(true);
@@ -118,19 +120,26 @@ public class Team extends JFrame {
 	class MyMouseListener extends MouseAdapter{
 		 public void mouseClicked(MouseEvent e) {
 			JList jl = (JList)e.getSource();
-			ImageIcon icon = new ImageIcon("images/"+jl.getName()+".gif");
+			String name = (String)jl.getSelectedValue();
+			String name1 = name.trim();
+			
+			ImageIcon icon = new ImageIcon("images/"+name1+".gif");
 			
 			la1.setIcon(icon);
+			la1.setText(name);
+			
 		 }
 		
 		
 		
 	}
+	
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
 		new Team();
+		
 
 	}
 
