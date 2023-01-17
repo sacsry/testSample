@@ -10,7 +10,13 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Random;
+import java.util.Scanner;
 import java.util.Vector;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -50,7 +56,28 @@ public class ProjectMain extends JFrame {
 
 	private int grade = 4;
 	private int a = 0;
+	
+	String type;
+	int atk ;
+	int def;
+	int control;
+	int tectics;
+	int sense;
+	int supply;
+	String grade1;
 
+//	public class hexagon1 extends JPanel{
+//
+//		public void paintComponent(Graphics g) {
+//			super.paintComponent(g);
+//			int [] xPoints = {60+(60*atk/1000),90-(0.06*sense+60),30,60-(60*def/1000),30,90};
+//			int [] yPoints = {60,120,120,60,0,0};
+//			g.drawPolygon(xPoints,yPoints,xPoints.length);
+//			g.setColor(Color.red);
+//		}
+//		
+//
+//	}
 	public ProjectMain() {
 		JButton resetBtn = new JButton("R");
 
@@ -61,6 +88,12 @@ public class ProjectMain extends JFrame {
 		Container c = getContentPane();
 		c.setBackground(Color.black);
 		c.setLayout(null);
+		
+		
+		hexagon hex = new hexagon();
+		hex.setBackground(Color.black);
+		hex.setBounds(590, 400, 150, 150);
+		c.add(hex);
 
 		for (int i = 0; i < 6; i++) {
 
@@ -137,6 +170,7 @@ public class ProjectMain extends JFrame {
 		member1JList.addMouseListener(listener);
 		//
 
+		
 		la1.setBounds(600, 200, 200, 200);
 		la2.setBounds(630, 280, 200, 200);
 		strBtn.setBounds(350, 600, 100, 30);
@@ -164,7 +198,6 @@ public class ProjectMain extends JFrame {
 		c.add(la1);
 		c.add(strBtn);
 
-		pack();
 		setSize(800, 800);
 		setVisible(true);
 
@@ -181,6 +214,35 @@ public class ProjectMain extends JFrame {
 			la1.setIcon(icon);
 			la2.setText(name);
 			la2.setForeground(Color.white);
+			
+			Connection conn;
+			Statement stmt = null;
+			Scanner s = new Scanner(System.in);
+			try {
+				Class.forName("com.mysql.jdbc.Driver"); // MySQL 드라이버 로드
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sampledb", "root", "test123"); // JDBC 연결
+				System.out.println("DB 연결 완료");
+				stmt = conn.createStatement(); // SQL문 처리용 Statement 객체 생성
+				ResultSet srs = stmt.executeQuery("SELECT * FROM sunsu_data"); // 테이블의 모든 데이터 검색
+				
+				new sunsu(name1);
+				srs = stmt.executeQuery("SELECT * FROM sunsu_data where 선수 = '"+name1+"'");// 테이블의 모든 데이터 검색
+				sunsu b = new sunsu(name1,srs);
+				atk = b.getAtk();
+				def = b.getDef();
+				control = b.getControl();
+				tectics = b.getTectics();
+				sense = b.getSense();
+				supply = b.getSupply();
+				grade1 = b.getGrade();
+			} catch (ClassNotFoundException e1) {
+				System.out.println("JDBC 드라이버 로드 오류");
+			} catch (SQLException e2) {
+				System.out.println("SQL 실행오류");
+			}
+			
+			
+		
 
 		}
 
@@ -193,7 +255,42 @@ public class ProjectMain extends JFrame {
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////////////////////////////	
-	
+	class DrawPanel extends JPanel
+	{
+		JLabel la = new JLabel();
+		public void paint(Graphics g) {
+			super.paint(g);
+			la.setText("준플레이오프");
+			g.setColor(Color.GREEN);
+			g.drawLine(160,750,160,550);
+			g.setColor(Color.gray);
+			if(a==2) {
+				la.setText("결승");
+				g.setColor(Color.green);
+			}
+			g.drawLine(535,400,535,250);
+			g.drawLine(310,400,535,400);
+			if(a==1) {
+				la.setText("플레이오프");
+				g.setColor(Color.green);
+			}
+			g.drawLine(160,550,310,550);
+			g.drawLine(310,550,310,400);
+			g.setColor(Color.WHITE);
+			g.drawLine(460,750,460,550);
+			g.drawLine(760,750,760,400);
+			g.setColor(Color.gray);
+			g.drawLine(310,550,460,550);
+			g.drawLine(760,400,535,400);
+			g.drawLine(535,250,1060,250);
+			g.setColor(Color.WHITE);
+			g.drawLine(1060,750,1060,250);
+			la.setBounds(200, 0, 150, 150);
+			la.setFont(new Font("포스트시즌", Font.ITALIC, 50));
+			la.setForeground(Color.WHITE);
+			add(la);
+		}
+	}
 	class YourFrame extends JFrame {
 
 		private JButton resetBtn = new JButton("R");
@@ -207,6 +304,11 @@ public class ProjectMain extends JFrame {
 			Container c = getContentPane();
 			c.setLayout(null);
 			c.setBackground(Color.black);
+			
+			DrawPanel panel = new DrawPanel();
+			panel.setBackground(Color.black);
+			panel.setBounds(0, 0, 1200, 700);
+			c.add(panel);
 			resetBtn.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
