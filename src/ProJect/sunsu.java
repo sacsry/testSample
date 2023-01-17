@@ -13,6 +13,7 @@ public class sunsu {
 	int tectics;
 	int sense;
 	int supply;
+	
 	String grade;
 	
 	
@@ -36,11 +37,40 @@ public class sunsu {
 //			System.out.println("SQL 실행오류");
 //		}
 //	}
+	
+	public void data(){
+		Connection conn;
+		Statement stmt = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver"); // MySQL 드라이버 로드
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sampledb", "root", "test123"); // JDBC
+																											// 연결
+			
+			stmt = conn.createStatement(); // SQL문 처리용 Statement 객체 생성
+			ResultSet srs = stmt.executeQuery("SELECT * FROM sunsu_data"); // 테이블의 모든 데이터 검색
+
+			new sunsu(name);
+			srs = stmt.executeQuery("SELECT * FROM sunsu_data where 이름 = '" + name + "'");// 테이블의 모든 데이터 검색
+			sunsu b = new sunsu(name, srs);
+			atk = b.getAtk();
+			def = b.getDef();
+			control = b.getControl();
+			tectics = b.getTectics();
+			sense = b.getSense();
+			supply = b.getSupply();
+			grade = b.getGrade();
+		} catch (ClassNotFoundException e1) {
+			System.out.println("JDBC 드라이버 로드 오류");
+		} catch (SQLException e2) {
+			System.out.println("SQL 실행오류");
+		}
+	}
 	public sunsu() {
 		
 	}
 	public sunsu (String name){
-		this.name = name; 
+		this.name = name;
+		
 	}
 	
 	public static String getName() {
@@ -114,6 +144,7 @@ public class sunsu {
 	public void setGrade(String grade) {
 		this.grade = grade;
 	}
+	
 
 	public sunsu(String name, ResultSet srs) throws SQLException{
 		this.name = name;
@@ -126,6 +157,7 @@ public class sunsu {
 			sense = Integer.parseInt(srs.getString("센스"));
 			supply = Integer.parseInt(srs.getString("물량"));
 			grade = srs.getString("등급");
+			
 		}
 		
 		

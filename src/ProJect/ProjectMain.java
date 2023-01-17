@@ -56,28 +56,32 @@ public class ProjectMain extends JFrame {
 
 	private int grade = 4;
 	private int a = 0;
-	
-	String type;
-	int atk ;
-	int def;
-	int control;
-	int tectics;
-	int sense;
-	int supply;
-	String grade1;
 
-//	public class hexagon1 extends JPanel{
-//
-//		public void paintComponent(Graphics g) {
-//			super.paintComponent(g);
-//			int [] xPoints = {60+(60*atk/1000),90-(0.06*sense+60),30,60-(60*def/1000),30,90};
-//			int [] yPoints = {60,120,120,60,0,0};
-//			g.drawPolygon(xPoints,yPoints,xPoints.length);
-//			g.setColor(Color.red);
-//		}
-//		
-//
-//	}
+	String type1;
+	int atk1;
+	int def1;
+	int control1;
+	int tectics1;
+	int sense1;
+	int supply1;
+	String grade1;
+	int sum1 ;
+
+	String type2;
+	int atk2;
+	int def2;
+	int control2;
+	int tectics2;
+	int sense2;
+	int supply2;
+	int sum2 ;
+	String grade2;
+	
+	int sum3 ;
+
+	JLabel statlabel = new JLabel();
+	JLabel statlabel2 = new JLabel();
+
 	public ProjectMain() {
 		JButton resetBtn = new JButton("R");
 
@@ -88,12 +92,9 @@ public class ProjectMain extends JFrame {
 		Container c = getContentPane();
 		c.setBackground(Color.black);
 		c.setLayout(null);
-		
-		
-		hexagon hex = new hexagon();
-		hex.setBackground(Color.black);
-		hex.setBounds(590, 400, 150, 150);
-		c.add(hex);
+
+		statlabel.setBounds(600, 370, 150, 150);
+		c.add(statlabel);
 
 		for (int i = 0; i < 6; i++) {
 
@@ -170,7 +171,6 @@ public class ProjectMain extends JFrame {
 		member1JList.addMouseListener(listener);
 		//
 
-		
 		la1.setBounds(600, 200, 200, 200);
 		la2.setBounds(630, 280, 200, 200);
 		strBtn.setBounds(350, 600, 100, 30);
@@ -214,35 +214,25 @@ public class ProjectMain extends JFrame {
 			la1.setIcon(icon);
 			la2.setText(name);
 			la2.setForeground(Color.white);
-			
+
 			Connection conn;
 			Statement stmt = null;
-			Scanner s = new Scanner(System.in);
-			try {
-				Class.forName("com.mysql.jdbc.Driver"); // MySQL 드라이버 로드
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sampledb", "root", "test123"); // JDBC 연결
-				System.out.println("DB 연결 완료");
-				stmt = conn.createStatement(); // SQL문 처리용 Statement 객체 생성
-				ResultSet srs = stmt.executeQuery("SELECT * FROM sunsu_data"); // 테이블의 모든 데이터 검색
-				
-				new sunsu(name1);
-				srs = stmt.executeQuery("SELECT * FROM sunsu_data where 선수 = '"+name1+"'");// 테이블의 모든 데이터 검색
-				sunsu b = new sunsu(name1,srs);
-				atk = b.getAtk();
-				def = b.getDef();
-				control = b.getControl();
-				tectics = b.getTectics();
-				sense = b.getSense();
-				supply = b.getSupply();
-				grade1 = b.getGrade();
-			} catch (ClassNotFoundException e1) {
-				System.out.println("JDBC 드라이버 로드 오류");
-			} catch (SQLException e2) {
-				System.out.println("SQL 실행오류");
-			}
-			
-			
-		
+
+			sunsu a = new sunsu(name1);
+			a.data();
+			atk1 = a.getAtk();
+			def1 = a.getDef();
+			tectics1 = a.getTectics();
+			sense1 = a.getSense();
+			supply1 = a.getSupply();
+			control1 = a.getControl();
+
+			statlabel.setVisible(true);
+			statlabel.setText("<html><body><center>공격력: " + atk1 + "<br>수비력: " + def1 + "<br>전략: " + tectics1
+					+ "<br>센스: " + sense1 + "<br>물량: " + supply1 + "<br>컨트롤: " + control1 + "</center></body></html>");
+
+			statlabel.setForeground(Color.white);
+			statlabel.setBackground(Color.black);
 
 		}
 
@@ -255,46 +245,47 @@ public class ProjectMain extends JFrame {
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////////////////////////////	
-	class DrawPanel extends JPanel
-	{
+	class DrawPanel extends JPanel {
 		JLabel la = new JLabel();
+
 		public void paint(Graphics g) {
 			super.paint(g);
 			la.setText("준플레이오프");
 			g.setColor(Color.GREEN);
-			g.drawLine(160,750,160,550);
+			g.drawLine(160, 750, 160, 550);
 			g.setColor(Color.gray);
-			if(a==2) {
+			if (a == 2) {
 				la.setText("결승");
 				g.setColor(Color.green);
 			}
-			g.drawLine(535,400,535,250);
-			g.drawLine(310,400,535,400);
-			if(a==1) {
+			g.drawLine(535, 400, 535, 250);
+			g.drawLine(310, 400, 535, 400);
+			if (a == 1) {
 				la.setText("플레이오프");
 				g.setColor(Color.green);
 			}
-			g.drawLine(160,550,310,550);
-			g.drawLine(310,550,310,400);
+			g.drawLine(160, 550, 310, 550);
+			g.drawLine(310, 550, 310, 400);
 			g.setColor(Color.WHITE);
-			g.drawLine(460,750,460,550);
-			g.drawLine(760,750,760,400);
+			g.drawLine(460, 750, 460, 550);
+			g.drawLine(760, 750, 760, 400);
 			g.setColor(Color.gray);
-			g.drawLine(310,550,460,550);
-			g.drawLine(760,400,535,400);
-			g.drawLine(535,250,1060,250);
+			g.drawLine(310, 550, 460, 550);
+			g.drawLine(760, 400, 535, 400);
+			g.drawLine(535, 250, 1060, 250);
 			g.setColor(Color.WHITE);
-			g.drawLine(1060,750,1060,250);
+			g.drawLine(1060, 750, 1060, 250);
 			la.setBounds(200, 0, 150, 150);
 			la.setFont(new Font("포스트시즌", Font.ITALIC, 50));
 			la.setForeground(Color.WHITE);
 			add(la);
 		}
 	}
+
 	class YourFrame extends JFrame {
 
 		private JButton resetBtn = new JButton("R");
-		
+
 		public YourFrame(String Myteam) {
 			wincount1 = 0;
 			losecount1 = 0;
@@ -304,7 +295,7 @@ public class ProjectMain extends JFrame {
 			Container c = getContentPane();
 			c.setLayout(null);
 			c.setBackground(Color.black);
-			
+
 			DrawPanel panel = new DrawPanel();
 			panel.setBackground(Color.black);
 			panel.setBounds(0, 0, 1200, 700);
@@ -508,6 +499,23 @@ public class ProjectMain extends JFrame {
 					sunsu2name.setText(name1);
 					sunsu2name.setForeground(Color.white);
 
+					sunsu a = new sunsu(name1);
+					a.data();
+					atk2 = a.getAtk();
+					def2 = a.getDef();
+					tectics2 = a.getTectics();
+					sense2 = a.getSense();
+					supply2 = a.getSupply();
+					control2 = a.getControl();
+
+					statlabel2.setVisible(true);
+					statlabel2.setText("<html><body><center>공격력: " + atk2 + "<br>수비력: " + def2 + "<br>전략: " + tectics2
+							+ "<br>센스: " + sense2 + "<br>물량: " + supply2 + "<br>컨트롤: " + control2
+							+ "</center></body></html>");
+
+					statlabel2.setForeground(Color.white);
+					statlabel2.setBackground(Color.black);
+
 				}
 			});
 
@@ -551,6 +559,11 @@ public class ProjectMain extends JFrame {
 			sunsu2.setBounds(960, 380, 100, 100);
 			sunsu2name.setBounds(990, 450, 100, 100);
 
+			statlabel.setVisible(false);
+			statlabel.setBounds(120, 480, 150, 150);
+			statlabel2.setBounds(960, 480, 150, 150);
+			c.add(statlabel2);
+			c.add(statlabel);
 			c.add(yourteam);
 			c.add(teamLabel);
 			c.add(sunsu1name);
@@ -628,6 +641,45 @@ public class ProjectMain extends JFrame {
 			YourImage.setIcon(YoursunsuImage[count]);
 			YourImage.setBounds(970, 380, 100, 100);
 
+			Connection conn;
+			Statement stmt = null;
+
+			sunsu a1 = new sunsu(Myentry[count]);
+			a1.data();
+			atk1 = a1.getAtk();
+			def1 = a1.getDef();
+			tectics1 = a1.getTectics();
+			sense1 = a1.getSense();
+			supply1 = a1.getSupply();
+			control1 = a1.getControl();
+
+			statlabel.setVisible(true);
+			statlabel.setText("<html><body><center>공격력: " + atk1 + "<br>수비력: " + def1 + "<br>전략: " + tectics1
+					+ "<br>센스: " + sense1 + "<br>물량: " + supply1 + "<br>컨트롤: " + control1 + "</center></body></html>");
+
+			statlabel.setForeground(Color.white);
+			statlabel.setBackground(Color.black);
+			statlabel.setBounds(130, 500, 150, 150);
+			c.add(statlabel);
+
+			sunsu a2 = new sunsu(Yourentry[count]);
+			a2.data();
+			atk2 = a2.getAtk();
+			def2 = a2.getDef();
+			tectics2 = a2.getTectics();
+			sense2 = a2.getSense();
+			supply2 = a2.getSupply();
+			control2 = a2.getControl();
+
+			statlabel2.setVisible(true);
+			statlabel2.setText("<html><body><center>공격력: " + atk2 + "<br>수비력: " + def2 + "<br>전략: " + tectics2
+					+ "<br>센스: " + sense2 + "<br>물량: " + supply2 + "<br>컨트롤: " + control2 + "</center></body></html>");
+
+			statlabel2.setForeground(Color.white);
+			statlabel2.setBackground(Color.black);
+			statlabel2.setBounds(970, 500, 150, 150);
+			c.add(statlabel2);
+
 			JLabel sunsu1name = new JLabel();
 
 			JLabel sunsu2name = new JLabel();
@@ -645,7 +697,7 @@ public class ProjectMain extends JFrame {
 
 				winLabel1[i].setBounds(450, 350 + (i * 100), 100, 100);
 				loseLabel1[i].setBounds(750, 350 + (i * 100), 100, 100);
-				
+
 				c.add(winLabel1[i]);
 				c.add(loseLabel1[i]);
 			}
@@ -660,11 +712,10 @@ public class ProjectMain extends JFrame {
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
 
-					
-						setVisible(false);
-						dispose();
-						new Battle(Myteam, Myentry[count], Yourentry[count], wincount, losecount, count);
-					
+					setVisible(false);
+					dispose();
+					new Battle(Myteam, Myentry[count], Yourentry[count], wincount, losecount, count);
+
 				}
 			});
 
@@ -736,17 +787,63 @@ public class ProjectMain extends JFrame {
 					new ProjectMain();
 				}
 			});
+			
+			sunsu a1 = new sunsu(sunsu1);
+			a1.data();
+			atk1 = a1.getAtk();
+			def1 = a1.getDef();
+			tectics1 = a1.getTectics();
+			sense1 = a1.getSense();
+			supply1 = a1.getSupply();
+			control1 = a1.getControl();
+			sum1 = atk1 + def1 + control1 + tectics1 + sense1 + supply1;
+
+			statlabel.setVisible(true);
+			statlabel.setText("<html><body><center>공격력: " + atk1 + "<br>수비력: " + def1 + "<br>전략: " + tectics1
+					+ "<br>센스: " + sense1 + "<br>물량: " + supply1 + "<br>컨트롤: " + control1 + "</center></body></html>");
+
+			statlabel.setForeground(Color.white);
+			statlabel.setBackground(Color.black);
+			statlabel.setBounds(130, 500, 150, 150);
+			c.add(statlabel);
+
+			sunsu a2 = new sunsu(sunsu2);
+			a2.data();
+			atk2 = a2.getAtk();
+			def2 = a2.getDef();
+			tectics2 = a2.getTectics();
+			sense2 = a2.getSense();
+			supply2 = a2.getSupply();
+			control2 = a2.getControl();
+			sum2 = atk2 + def2 + control2 + tectics2 + sense2 + supply2;
+
+			statlabel2.setVisible(true);
+			statlabel2.setText("<html><body><center>공격력: " + atk2 + "<br>수비력: " + def2 + "<br>전략: " + tectics2
+					+ "<br>센스: " + sense2 + "<br>물량: " + supply2 + "<br>컨트롤: " + control2 + "</center></body></html>");
+
+			statlabel2.setForeground(Color.white);
+			statlabel2.setBackground(Color.black);
+			statlabel2.setBounds(970, 500, 150, 150);
+			c.add(statlabel2);
+			
+			sum3 = sum1 + sum2;
 			nextBtn1.setVisible(false);
 			JButton strBtn1 = new JButton("시작");
 			Random r1 = new Random();
-			int winrate = r1.nextInt(2);
+		     
+			int winrate = r1.nextInt(100);
+			double winrate1 = (double)(sum1/sum3);
 			strBtn1.addActionListener(new ActionListener() {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
 
-					if (winrate == 0) {
+					
+					System.out.println(winrate1);
+					System.out.println(winrate);
+					
+					if (winrate <= winrate1) {
 						winLabel.setBounds(450, 350, 50, 50);
 						loseLabel.setBounds(750, 350, 50, 50);
 						PvP.setText((wincount + 1) + "           :           " + losecount);
@@ -777,6 +874,8 @@ public class ProjectMain extends JFrame {
 
 				}
 			});
+
+			
 			strBtn1.setBounds(550, 900, 100, 30);
 
 			nextBtn1.setBounds(550, 900, 100, 30);
@@ -786,40 +885,36 @@ public class ProjectMain extends JFrame {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 
-					if(wincount1 == 2 && losecount1 ==2) {
+					if (wincount1 == 2 && losecount1 == 2) {
 						setVisible(false);
 						dispose();
 						new AceFrame(Myteam);
-					}
-					else if(wincount1 ==3) {
+					} else if (wincount1 == 3) {
 						grade--;
 						a++;
-						
-						if(a == 3) {
+
+						if (a == 3) {
 							setVisible(false);
 							dispose();
-							new loseFrame(Myteam,1);
-						}
-						else {
+							new loseFrame(Myteam, 1);
+						} else {
 							for (int i = 0; i < 6; i++) {
 
 								winLabel1[i].setText("");
 								loseLabel1[i].setText("");
 							}
-						setVisible(false);
-						dispose();
-						new YourFrame(Myteam);
+							setVisible(false);
+							dispose();
+							new YourFrame(Myteam);
 						}
-					}
-					else if(losecount1 ==3 ) {
+					} else if (losecount1 == 3) {
 						setVisible(false);
 						dispose();
-						new loseFrame(Myteam,grade);
-					}
-					else {
-					setVisible(false);
-					dispose();
-					new gameFrame(Myteam, count1, wincount1, losecount1);
+						new loseFrame(Myteam, grade);
+					} else {
+						setVisible(false);
+						dispose();
+						new gameFrame(Myteam, count1, wincount1, losecount1);
 					}
 				}
 
@@ -829,7 +924,7 @@ public class ProjectMain extends JFrame {
 			MysunsuLabel.setIcon(MysunsuImage);
 			YoursunsuLabel.setIcon(YoursunsuImage);
 			MysunsuLabel.setBounds(120, 380, 100, 100);
-			YoursunsuLabel.setBounds(920, 380, 100, 100);
+			YoursunsuLabel.setBounds(970, 380, 100, 100);
 
 			PvP.setText(wincount + "           :           " + losecount);
 			PvP.setFont(new Font("PvP", Font.PLAIN, 70));
@@ -851,7 +946,7 @@ public class ProjectMain extends JFrame {
 			mysunsu.setBounds(120, 380, 100, 100);
 			sunsu1name.setBounds(140, 450, 100, 100);
 			yoursunsu.setBounds(920, 380, 100, 100);
-			sunsu2name.setBounds(940, 450, 100, 100);
+			sunsu2name.setBounds(990, 450, 100, 100);
 
 			c.add(mysunsu);
 			c.add(yoursunsu);
