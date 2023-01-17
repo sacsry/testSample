@@ -840,8 +840,7 @@ public class ProjectMain extends JFrame {
 					// TODO Auto-generated method stub
 
 					
-					System.out.println(winrate1);
-					System.out.println(winrate);
+					
 					
 					if (winrate <= winrate1) {
 						winLabel.setBounds(450, 350, 50, 50);
