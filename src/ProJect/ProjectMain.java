@@ -287,9 +287,7 @@ public class ProjectMain extends JFrame {
 		private JButton resetBtn = new JButton("R");
 
 		public YourFrame(String Myteam) {
-			wincount1 = 0;
-			losecount1 = 0;
-			count1 = 0;
+			
 			setTitle("Mystarcraft");
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			Container c = getContentPane();
@@ -360,6 +358,9 @@ public class ProjectMain extends JFrame {
 		private JButton resetBtn = new JButton("R");
 
 		public EntryFrame(String Myteam) {
+			wincount1 = 0;
+			losecount1 = 0;
+			count1 = 0;
 			setTitle("Mystarcraft");
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			Container c = getContentPane();
@@ -379,12 +380,13 @@ public class ProjectMain extends JFrame {
 				setlabel[i].setFont(new Font("선수이름", Font.ITALIC, 15));
 				setlabel[i].setBounds(550, 380 + (70 * i), 100, 30);
 				c.add(setlabel[i]);
+				int a = i;
 				setbtn[i].addActionListener(new ActionListener() {
-
+					
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						// TODO Auto-generated method stub
-						setlabel[Integer.parseInt(e.getActionCommand()) - 1].setText(member1JList.getSelectedValue());
+						setlabel[a].setText(member1JList.getSelectedValue());
 					}
 				});
 			}
@@ -393,6 +395,7 @@ public class ProjectMain extends JFrame {
 			finalLabel.setFont(new Font("선수이름", Font.ITALIC, 15));
 
 			JList anotherTeamJList = new JList();
+			
 			resetBtn.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
@@ -830,17 +833,17 @@ public class ProjectMain extends JFrame {
 			nextBtn1.setVisible(false);
 			JButton strBtn1 = new JButton("시작");
 			Random r1 = new Random();
-		     
+		    
 			int winrate = r1.nextInt(100);
-			double winrate1 = (double)(sum1/sum3);
+			int winrate1 = (int)((double)((sum1)*100)/(double)sum3);
 			strBtn1.addActionListener(new ActionListener() {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
 
-					
-					
+					System.out.println(winrate);
+					System.out.println(winrate1);
 					
 					if (winrate <= winrate1) {
 						winLabel.setBounds(450, 350, 50, 50);
