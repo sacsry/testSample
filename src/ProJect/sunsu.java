@@ -51,14 +51,17 @@ public class sunsu {
 
 			new sunsu(name);
 			srs = stmt.executeQuery("SELECT * FROM sunsu_data where 이름 = '" + name + "'");// 테이블의 모든 데이터 검색
-			sunsu b = new sunsu(name, srs);
-			atk = b.getAtk();
-			def = b.getDef();
-			control = b.getControl();
-			tectics = b.getTectics();
-			sense = b.getSense();
-			supply = b.getSupply();
-			grade = b.getGrade();
+			while(srs.next()) {
+				type = srs.getString("종족");
+				atk = Integer.parseInt(srs.getString("공격력"));
+				def = Integer.parseInt(srs.getString("수비력"));
+				control = Integer.parseInt(srs.getString("컨트롤"));
+				tectics = Integer.parseInt(srs.getString("전략"));
+				sense = Integer.parseInt(srs.getString("센스"));
+				supply = Integer.parseInt(srs.getString("물량"));
+				grade = srs.getString("등급");
+				
+			}
 		} catch (ClassNotFoundException e1) {
 			System.out.println("JDBC 드라이버 로드 오류");
 		} catch (SQLException e2) {
@@ -146,21 +149,6 @@ public class sunsu {
 	}
 	
 
-	public sunsu(String name, ResultSet srs) throws SQLException{
-		this.name = name;
-		while(srs.next()) {
-			type = srs.getString("종족");
-			atk = Integer.parseInt(srs.getString("공격력"));
-			def = Integer.parseInt(srs.getString("수비력"));
-			control = Integer.parseInt(srs.getString("컨트롤"));
-			tectics = Integer.parseInt(srs.getString("전략"));
-			sense = Integer.parseInt(srs.getString("센스"));
-			supply = Integer.parseInt(srs.getString("물량"));
-			grade = srs.getString("등급");
-			
-		}
-		
-		
-	}
+	
 	
 }

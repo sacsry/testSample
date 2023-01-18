@@ -26,7 +26,9 @@ import javax.swing.*;
 public class ProjectMain extends JFrame {
 	private String Team[] = { "KT 롤스터", "SK 텔레콤 T1", "화승 OZ", "하이트 스파키즈", "MBC게임 히어로", "CJ 엔투스", "삼성전자 칸", "STX 소울",
 			"웅진 스타즈", "eStrO", "위메이드 FOX", "공군 ACE" };
+	
 	private ArrayList<String> NewTeam;
+	private ArrayList<String> NewMap;
 	private JLabel la = new JLabel("팀을 선택해주세요!");
 	private JComboBox<String> TeamCombo = new JComboBox<String>(Team);
 
@@ -36,11 +38,12 @@ public class ProjectMain extends JFrame {
 	private JLabel[] winLabel1 = new JLabel[6];
 	private JLabel[] loseLabel1 = new JLabel[6];
 
-	private String Myentry[] = new String[4];
-	private String Yourentry[] = new String[4];
+	private String Myentry[] = new String[5];
+	private String Yourentry[] = new String[5];
 
 	private int num[] = new int[3];
 	private int num2[] = new int[4];
+	
 	private Vector<String> v = new Vector<String>();
 	private Vector<String> v1 = new Vector<String>();
 	private JList<String> member1JList = new JList<String>(v);
@@ -79,8 +82,11 @@ public class ProjectMain extends JFrame {
 	
 	int sum3 ;
 
-	JLabel statlabel = new JLabel();
-	JLabel statlabel2 = new JLabel();
+	private JLabel statlabel = new JLabel();
+	private JLabel statlabel2 = new JLabel();
+	
+	private JLabel Mapla = new JLabel();
+	private JLabel Mapdatalabel = new JLabel();
 
 	public ProjectMain() {
 		JButton resetBtn = new JButton("R");
@@ -226,10 +232,11 @@ public class ProjectMain extends JFrame {
 			sense1 = a.getSense();
 			supply1 = a.getSupply();
 			control1 = a.getControl();
-
+			type1 = a.getType();
+			
 			statlabel.setVisible(true);
 			statlabel.setText("<html><body><center>공격력: " + atk1 + "<br>수비력: " + def1 + "<br>전략: " + tectics1
-					+ "<br>센스: " + sense1 + "<br>물량: " + supply1 + "<br>컨트롤: " + control1 + "</center></body></html>");
+					+ "<br>센스: " + sense1 + "<br>물량: " + supply1 + "<br>컨트롤: " + control1 + "<br>종족: " + type1 + "</center></body></html>");
 
 			statlabel.setForeground(Color.white);
 			statlabel.setBackground(Color.black);
@@ -287,6 +294,7 @@ public class ProjectMain extends JFrame {
 		private JButton resetBtn = new JButton("R");
 
 		public YourFrame(String Myteam) {
+			
 			
 			setTitle("Mystarcraft");
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -366,14 +374,19 @@ public class ProjectMain extends JFrame {
 			Container c = getContentPane();
 			c.setLayout(null);
 			c.setBackground(Color.black);
-
+			
+			MapChoice choice = new MapChoice();
+			NewMap = choice.getNewMap();
+			
+			
 			for (int i = 0; i < 5; i++) {
-				setbtn[i] = new JButton((i + 1) + "");
+				setbtn[i] = new JButton(NewMap.get(i));
 				setbtn[i].setBounds(550, 350 + (70 * i), 100, 30);
 				c.add(setbtn[i]);
 
 			}
 
+			
 			for (int i = 0; i < 4; i++) {
 				setlabel[i] = new JLabel("empty");
 				setlabel[i].setForeground(Color.white);
@@ -381,15 +394,52 @@ public class ProjectMain extends JFrame {
 				setlabel[i].setBounds(550, 380 + (70 * i), 100, 30);
 				c.add(setlabel[i]);
 				int a = i;
+				
+				
 				setbtn[i].addActionListener(new ActionListener() {
 					
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						// TODO Auto-generated method stub
+						
+						
+						Map currentMap = new Map(NewMap.get(a));
+						currentMap.data();
+						Mapdatalabel.setText("<html><body><center>"+NewMap.get(a)+"<br>T:Z " + currentMap.getMyTerranwinrate() +":"+currentMap.getYourZergwinrate()+ 
+								"<br>Z:P " + currentMap.getMyZergwinrate() +":"+currentMap.getYourProtosswinrate()+ 
+								"<br>P:T " + currentMap.getMyProtosswinrate() +":"+currentMap.getYourTerranwinrate()
+								+ "</center></body></html>");
+						Mapdatalabel.setFont(new Font("맵 정보", Font.ITALIC, 17));
+						Mapdatalabel.setForeground(Color.white);
+						Mapdatalabel.setBounds(630, 150, 200, 200);
+						ImageIcon icon = new ImageIcon("images/맵/" + NewMap.get(a) + ".gif");
+						Mapla.setIcon(icon);
+						Mapla.setBounds(480,150, 200, 200);
 						setlabel[a].setText(member1JList.getSelectedValue());
 					}
 				});
 			}
+			setbtn[4].addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					Map currentMap = new Map(NewMap.get(4));
+					currentMap.data();
+					Mapdatalabel.setText("<html><body><center>"+NewMap.get(4)+"<br>T:Z " + currentMap.getMyTerranwinrate() +":"+currentMap.getYourZergwinrate()+ 
+							"<br>Z:P " + currentMap.getMyZergwinrate() +":"+currentMap.getYourProtosswinrate()+ 
+							"<br>P:T " + currentMap.getMyProtosswinrate() +":"+currentMap.getYourTerranwinrate()
+							+ "</center></body></html>");
+					Mapdatalabel.setFont(new Font("맵 정보", Font.ITALIC, 17));
+					Mapdatalabel.setForeground(Color.white);
+					Mapdatalabel.setBounds(630, 150, 200, 200);
+					ImageIcon icon = new ImageIcon("images/맵/" + NewMap.get(4) + ".gif");
+					Mapla.setIcon(icon);
+					Mapla.setBounds(480,150, 200, 200);
+				}
+			});
+			c.add(Mapla);
+			c.add(Mapdatalabel);
 
 			JLabel finalLabel = new JLabel("ACE");
 			finalLabel.setFont(new Font("선수이름", Font.ITALIC, 15));
@@ -510,10 +560,11 @@ public class ProjectMain extends JFrame {
 					sense2 = a.getSense();
 					supply2 = a.getSupply();
 					control2 = a.getControl();
+					type2 = a.getType();
 
 					statlabel2.setVisible(true);
 					statlabel2.setText("<html><body><center>공격력: " + atk2 + "<br>수비력: " + def2 + "<br>전략: " + tectics2
-							+ "<br>센스: " + sense2 + "<br>물량: " + supply2 + "<br>컨트롤: " + control2
+							+ "<br>센스: " + sense2 + "<br>물량: " + supply2 + "<br>컨트롤: " + control2+ "<br>종족: " + type2
 							+ "</center></body></html>");
 
 					statlabel2.setForeground(Color.white);
@@ -563,9 +614,10 @@ public class ProjectMain extends JFrame {
 			sunsu2name.setBounds(990, 450, 100, 100);
 
 			statlabel.setVisible(false);
-			statlabel.setBounds(120, 480, 150, 150);
-			statlabel2.setBounds(960, 480, 150, 150);
+			statlabel.setBounds(120, 500, 150, 150);
+			statlabel2.setBounds(960, 500, 150, 150);
 			c.add(statlabel2);
+			
 			c.add(statlabel);
 			c.add(yourteam);
 			c.add(teamLabel);
@@ -616,19 +668,57 @@ public class ProjectMain extends JFrame {
 					new ProjectMain();
 				}
 			});
+			
+			JButton[] setbtn1 = new JButton[5];
+			for (int i = 0; i < 5; i++) {
+				setbtn1[i] = new JButton(NewMap.get(i));
+				setbtn1[i].setBounds(550, 350 + (70 * i), 100, 30);
+				int a = i;
+				setbtn1[i].addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						Map currentMap = new Map(NewMap.get(a));
+						currentMap.data();
+						Mapdatalabel.setText("<html><body><center>"+NewMap.get(a)+"<br>T:Z " + currentMap.getMyTerranwinrate() +":"+currentMap.getYourZergwinrate()+ 
+								"<br>Z:P " + currentMap.getMyZergwinrate() +":"+currentMap.getYourProtosswinrate()+ 
+								"<br>P:T " + currentMap.getMyProtosswinrate() +":"+currentMap.getYourTerranwinrate()
+								+ "</center></body></html>");
+						Mapdatalabel.setFont(new Font("맵 정보", Font.ITALIC, 17));
+						Mapdatalabel.setForeground(Color.white);
+						Mapdatalabel.setBounds(630, 150, 200, 200);
+						ImageIcon icon = new ImageIcon("images/맵/" + NewMap.get(a) + ".gif");
+						Mapla.setIcon(icon);
+						Mapla.setBounds(480,150, 200, 200);
+						setlabel[a].setText(member1JList.getSelectedValue());
+						
+						MyImage.setIcon(MysunsuImage[a]);
+						MyImage.setBounds(130, 380, 100, 100);
+						YourImage.setIcon(YoursunsuImage[a]);
+						YourImage.setBounds(970, 380, 100, 100);
+						
+					}
+				});
+				c.add(setbtn1[i]);
+
+			}
+			c.add(Mapdatalabel);
+			c.add(Mapla);
+			
 
 			JButton strBtn1 = new JButton("시작");
 
 			for (int i = 0; i < 4; i++) {
 				MysunsuLabel[i] = new JLabel();
 				MysunsuLabel[i].setText(Myentry[i]);
-				MysunsuLabel[i].setBounds(350, 350 + (100 * i), 100, 100);
+				MysunsuLabel[i].setBounds(350, 350 + (70 * i), 100, 30);
 				MysunsuLabel[i].setFont(new Font("출전선수", Font.ITALIC, 20));
 				MysunsuLabel[i].setForeground(Color.white);
 
 				YoursunsuLabel[i] = new JLabel();
 				YoursunsuLabel[i].setText(Yourentry[i]);
-				YoursunsuLabel[i].setBounds(850, 350 + (100 * i), 100, 100);
+				YoursunsuLabel[i].setBounds(750, 350 + (70 * i), 100, 30);
 				YoursunsuLabel[i].setFont(new Font("출전선수", Font.ITALIC, 20));
 				YoursunsuLabel[i].setForeground(Color.white);
 
@@ -655,10 +745,11 @@ public class ProjectMain extends JFrame {
 			sense1 = a1.getSense();
 			supply1 = a1.getSupply();
 			control1 = a1.getControl();
+			type1 = a1.getType();
 
 			statlabel.setVisible(true);
 			statlabel.setText("<html><body><center>공격력: " + atk1 + "<br>수비력: " + def1 + "<br>전략: " + tectics1
-					+ "<br>센스: " + sense1 + "<br>물량: " + supply1 + "<br>컨트롤: " + control1 + "</center></body></html>");
+					+ "<br>센스: " + sense1 + "<br>물량: " + supply1 + "<br>컨트롤: " + control1 + "<br>종족: " + type1 + "</center></body></html>");
 
 			statlabel.setForeground(Color.white);
 			statlabel.setBackground(Color.black);
@@ -673,10 +764,11 @@ public class ProjectMain extends JFrame {
 			sense2 = a2.getSense();
 			supply2 = a2.getSupply();
 			control2 = a2.getControl();
+			type2 = a2.getType();
 
 			statlabel2.setVisible(true);
 			statlabel2.setText("<html><body><center>공격력: " + atk2 + "<br>수비력: " + def2 + "<br>전략: " + tectics2
-					+ "<br>센스: " + sense2 + "<br>물량: " + supply2 + "<br>컨트롤: " + control2 + "</center></body></html>");
+					+ "<br>센스: " + sense2 + "<br>물량: " + supply2 + "<br>컨트롤: " + control2 + "<br>종족: " + type2 +"</center></body></html>");
 
 			statlabel2.setForeground(Color.white);
 			statlabel2.setBackground(Color.black);
@@ -698,8 +790,8 @@ public class ProjectMain extends JFrame {
 
 			for (int i = 0; i < 6; i++) {
 
-				winLabel1[i].setBounds(450, 350 + (i * 100), 100, 100);
-				loseLabel1[i].setBounds(750, 350 + (i * 100), 100, 100);
+				winLabel1[i].setBounds(450, 350 + (i * 70), 100, 30);
+				loseLabel1[i].setBounds(850, 350 + (i * 70), 100, 30);
 
 				c.add(winLabel1[i]);
 				c.add(loseLabel1[i]);
@@ -707,7 +799,7 @@ public class ProjectMain extends JFrame {
 
 			PvP.setFont(new Font("PvP", Font.PLAIN, 70));
 			PvP.setForeground(Color.white);
-			PvP.setBounds(380, 100, 600, 300);
+			PvP.setBounds(360, 0, 600, 200);
 			PvP.setText(wincount + "           :           " + losecount);
 			strBtn1.addActionListener(new ActionListener() {
 
@@ -799,11 +891,12 @@ public class ProjectMain extends JFrame {
 			sense1 = a1.getSense();
 			supply1 = a1.getSupply();
 			control1 = a1.getControl();
+			type1 = a1.getType();
 			sum1 = atk1 + def1 + control1 + tectics1 + sense1 + supply1;
 
 			statlabel.setVisible(true);
 			statlabel.setText("<html><body><center>공격력: " + atk1 + "<br>수비력: " + def1 + "<br>전략: " + tectics1
-					+ "<br>센스: " + sense1 + "<br>물량: " + supply1 + "<br>컨트롤: " + control1 + "</center></body></html>");
+					+ "<br>센스: " + sense1 + "<br>물량: " + supply1 + "<br>컨트롤: " + control1 + "<br>종족: " + type1 + "</center></body></html>");
 
 			statlabel.setForeground(Color.white);
 			statlabel.setBackground(Color.black);
@@ -818,11 +911,12 @@ public class ProjectMain extends JFrame {
 			sense2 = a2.getSense();
 			supply2 = a2.getSupply();
 			control2 = a2.getControl();
+			type2 = a2.getType();
 			sum2 = atk2 + def2 + control2 + tectics2 + sense2 + supply2;
 
 			statlabel2.setVisible(true);
 			statlabel2.setText("<html><body><center>공격력: " + atk2 + "<br>수비력: " + def2 + "<br>전략: " + tectics2
-					+ "<br>센스: " + sense2 + "<br>물량: " + supply2 + "<br>컨트롤: " + control2 + "</center></body></html>");
+					+ "<br>센스: " + sense2 + "<br>물량: " + supply2 + "<br>컨트롤: " + control2 + "<br>종족: " + type2 +"</center></body></html>");
 
 			statlabel2.setForeground(Color.white);
 			statlabel2.setBackground(Color.black);
@@ -841,9 +935,6 @@ public class ProjectMain extends JFrame {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
-
-					System.out.println(winrate);
-					System.out.println(winrate1);
 					
 					if (winrate <= winrate1) {
 						winLabel.setBounds(450, 350, 50, 50);
@@ -1102,6 +1193,8 @@ public class ProjectMain extends JFrame {
 			}
 		}
 	}
+	
+	
 
 	public void randomentry() {
 		Random random = new Random();
