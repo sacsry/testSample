@@ -13,6 +13,8 @@ public class sunsu {
 	int tectics;
 	int sense;
 	int supply;
+	int win;
+	int lose;
 	
 	String grade;
 	
@@ -148,7 +150,20 @@ public class sunsu {
 		this.grade = grade;
 	}
 	
+	public int getWin() {
+		return win;
+	}
 
+	public void setWin(int win) {
+		this.win = win;
+	}
+	public int getLose() {
+		return lose;
+	}
+
+	public void setLose(int lose) {
+		this.lose = lose;
+	}
 	
 	
 }

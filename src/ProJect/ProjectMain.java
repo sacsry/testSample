@@ -93,6 +93,12 @@ public class ProjectMain extends JFrame {
 	private JLabel Mapla = new JLabel();
 	private JLabel Mapdatalabel = new JLabel();
 
+	private JTextArea Text = new JTextArea();
+
+	
+	boolean WIN ;
+	boolean Lose;
+	
 	public ProjectMain() {
 		JButton resetBtn = new JButton("R");
 		Victorycount = 0;
@@ -614,12 +620,12 @@ public class ProjectMain extends JFrame {
 
 			JLabel teamLabel = new JLabel();
 			teamLabel.setIcon(team);
-			teamLabel.setBounds(100, 200, 150, 100);
+			teamLabel.setBounds(100, 30, 150, 100);
 
 			ImageIcon team1 = new ImageIcon("images/로고/" + NewTeam.get(num[a]) + ".gif");
 			JLabel yourteam = new JLabel();
 			yourteam.setIcon(team1);
-			yourteam.setBounds(950, 200, 150, 100);
+			yourteam.setBounds(950, 30, 150, 100);
 
 			resetBtn.setBounds(0, 0, 50, 50);
 			strBtn1.setBounds(520, 850, 200, 40);
@@ -628,6 +634,13 @@ public class ProjectMain extends JFrame {
 			sunsu2.setBounds(960, 380, 100, 100);
 			sunsu2name.setBounds(990, 450, 100, 100);
 
+			JLabel PvP = new JLabel();
+			PvP.setText("0           :           0");
+			PvP.setFont(new Font("PvP", Font.PLAIN, 70));
+			PvP.setForeground(Color.white);
+			PvP.setBounds(360, 0, 600, 200);
+			
+			c.add(PvP);
 			statlabel.setVisible(false);
 			statlabel2.setVisible(false);
 			statlabel.setBounds(120, 500, 150, 150);
@@ -881,7 +894,7 @@ public class ProjectMain extends JFrame {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
-
+					Text.setText("");//문자중계 초기화
 					setVisible(false);
 					dispose();
 					new Battle(Myteam, Myentry[count], Yourentry[count], wincount, losecount, count);
@@ -932,10 +945,14 @@ public class ProjectMain extends JFrame {
 		private ImageIcon MysunsuImage = new ImageIcon();
 		private ImageIcon YoursunsuImage = new ImageIcon();
 		private JLabel PvP = new JLabel();
-		private JButton nextBtn1 = new JButton("next>>");
+		
+		
 
 		private JLabel winLabel = new JLabel("WIN");
-		private JLabel loseLabel = new JLabel("Lose");
+		private JLabel loseLabel = new JLabel("GG");
+		private JButton nextBtn1 = new JButton("next>>");/// battle frame 다음세트 버튼
+		private int wincount;
+		private int losecount;
 
 		public Battle(String Myteam, String sunsu1, String sunsu2, int wincount, int losecount, int count) {
 
@@ -944,11 +961,14 @@ public class ProjectMain extends JFrame {
 			Container c = getContentPane();
 			c.setLayout(null);
 			c.setBackground(Color.black);
-			winLabel.setFont(new Font("승리", Font.PLAIN, 25));
+			winLabel.setFont(new Font("승리", Font.BOLD, 40));
 			winLabel.setForeground(Color.green);
-			loseLabel.setFont(new Font("패배", Font.PLAIN, 25));
+			loseLabel.setFont(new Font("패배", Font.BOLD, 40));
 			loseLabel.setForeground(Color.red);
 
+			this.wincount = wincount;
+			this.losecount = losecount;
+			
 			resetBtn.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
@@ -959,6 +979,8 @@ public class ProjectMain extends JFrame {
 				}
 			});
 			
+			Text.setBounds(460, 330, 300, 500);
+			c.add(Text);
 			sunsu a1 = new sunsu(sunsu1);
 			a1.data();
 			atk1 = a1.getAtk();
@@ -1012,10 +1034,10 @@ public class ProjectMain extends JFrame {
 					+ "</center></body></html>");
 			Mapdatalabel.setFont(new Font("맵 정보", Font.ITALIC, 17));
 			Mapdatalabel.setForeground(Color.white);
-			Mapdatalabel.setBounds(630, 150, 200, 200);
+			Mapdatalabel.setBounds(680, 150, 200, 200);
 			ImageIcon icon = new ImageIcon("images/맵/" + NewMap.get(count) + ".gif");
 			Mapla.setIcon(icon);
-			Mapla.setBounds(480,150, 200, 200);
+			Mapla.setBounds(460,150, 200, 200);
 			
 			int mapwinrate = 0;
 			
@@ -1047,28 +1069,35 @@ public class ProjectMain extends JFrame {
 					// TODO Auto-generated method stub
 					System.out.println(winrate);
 					System.out.println(winrate1);
+					Person1 p1 = new Person1(sunsu1);
+					Person2 p2 = new Person2(sunsu2);
+					p1.start();
+					p2.start();
 					if (winrate <= winrate1) {
-						winLabel.setBounds(450, 350, 50, 50);
-						loseLabel.setBounds(750, 350, 50, 50);
-						PvP.setText((wincount + 1) + "           :           " + losecount);
-						wincount1 = wincount + 1;
+						winLabel.setBounds(130, 300, 100, 50);
+						loseLabel.setBounds(980, 400, 100, 50);
+//						PvP.setText((wincount1) + "           :           " + losecount);
+//						wincount1 = wincount + 1;
 						winLabel1[count].setText("WIN");
 						winLabel1[count].setForeground(Color.green);
 						loseLabel1[count].setText("Lose");
 						loseLabel1[count].setForeground(Color.red);
+						WIN = true;
+						Lose = false;
 
 					}
-
+					
 					else {
-						loseLabel.setBounds(450, 350 + 100, 50, 50);
-						winLabel.setBounds(750, 350 + 100, 50, 50);
-						PvP.setText(wincount + "           :           " + (losecount + 1));
-						losecount1 = losecount + 1;
+						loseLabel.setBounds(130, 400, 100, 50);
+						winLabel.setBounds(980, 300, 100, 50);
+//						PvP.setText(wincount + "           :           " + losecount1);
+//						losecount1 = losecount + 1;
 						winLabel1[count].setText("Lose");
 						loseLabel1[count].setText("WIN");
 						winLabel1[count].setForeground(Color.red);
 						loseLabel1[count].setForeground(Color.green);
-
+						WIN = false;
+						Lose = true;
 					}
 
 					count1 = count + 1;
@@ -1096,6 +1125,8 @@ public class ProjectMain extends JFrame {
 					} else if (wincount1 == 3) {
 						grade--;
 						a++;
+						ACECARD = "ACE";
+						yourACECARD = "ACE";
 
 						if (a == 3) {
 							Victorycount++;
@@ -1186,8 +1217,79 @@ public class ProjectMain extends JFrame {
 
 			setSize(1200, 1000);
 			setVisible(true);
+			
+			
+		}
+		
+		class Person1 extends Thread
+		{
+			private String name;
+			public Person1(String name)
+			{
+				this.name = name;
+			}
+
+			public void run()
+			{
+				
+				try{
+					
+					for (int i = 1 ; i <=5 ; i++)
+					{
+						
+						Text.append(name+" 문자중계 테스트"+i+"\n");
+						Thread.sleep(100);
+						
+					}
+					if(WIN) {
+						Text.append(name+"선수 역시 이기는 법을 아는거같아요!");
+						wincount1 = wincount + 1;
+						PvP.setText(wincount1 + "           :           " + losecount);
+					}
+					
+				}catch(Exception e){
+				}
+			}
+
+		}
+		class Person2 extends Thread
+		{
+			private String name;
+			public Person2(String name)
+			{
+				this.name = name;
+			}
+
+			public void run()
+			{
+				
+				try{
+					winLabel.setVisible(false);
+					loseLabel.setVisible(false);
+					nextBtn1.setEnabled(false);
+					for (int i = 1 ; i <=5 ; i++)
+					{
+						
+						Text.append(name+" 문자중계 테스트"+i+"\n");
+						Thread.sleep(100);
+						
+					}
+					if(Lose) {
+						Text.append(name+"선수 역시 이기는 법을 아는거같아요!");
+						losecount1 = losecount + 1;
+						PvP.setText(wincount + "           :           " + losecount1);
+					}
+					winLabel.setVisible(true);
+					loseLabel.setVisible(true);
+					nextBtn1.setEnabled(true);
+				}catch(Exception e){
+				}
+			}
+
 		}
 	}
+	
+	
 	///////////////////////////////////////////////////////////////////////////////////
 
 	//////////////////////////////////////////////////////////////////////////////////////
@@ -1199,12 +1301,19 @@ public class ProjectMain extends JFrame {
 		private JLabel sunsu1name = new JLabel();
 		private JLabel sunsu2 = new JLabel();
 		private JLabel sunsu2name = new JLabel();
+		private JLabel acelabel = new JLabel();
 		public AceFrame(String Myteam) {
 			setTitle("Mystarcraft");
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			Container c = getContentPane();
 			c.setLayout(null);
 			c.setBackground(Color.black);
+			
+			ImageIcon aceIcon= new ImageIcon("Images/라벨.PNG");//장식
+			member1JList.setBounds(300, 350, 150, 400);
+			acelabel.setIcon(aceIcon);
+			acelabel.setBounds(500,350,200,400);
+			c.add(acelabel);
 
 			member1JList.setBounds(350, 350, 150, 400);
 			
@@ -1384,14 +1493,15 @@ public class ProjectMain extends JFrame {
 	class loseFrame extends JFrame {
 		private JButton resetBtn = new JButton("R");
 
-		public loseFrame(String Myteam, int grade) {
+		public loseFrame(String Myteam, int grade1) {
 			setTitle("MyStarCraft");
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			Container c = getContentPane();
 			c.setLayout(null);
 			c.setBackground(Color.black);
 
-			JLabel gradeLabel = new JLabel(grade + "위 달성.");
+			
+			JLabel gradeLabel = new JLabel(grade1 + "위 달성.");
 			gradeLabel.setFont(new Font("순위", Font.ITALIC, 100));
 			gradeLabel.setForeground(Color.green);
 			gradeLabel.setBounds(400, 200, 650, 300);
@@ -1418,12 +1528,25 @@ public class ProjectMain extends JFrame {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
+					a = 0;
+					grade = 4;
+					for (int i = 0; i < 6; i++) {
+
+						winLabel1[i].setText("");
+						loseLabel1[i].setText("");
+					}
+					randomteam();
+					NewTeam = new ArrayList<String>();
+					for (String temp : Team) {
+						if (!temp.equals(TeamCombo.getSelectedItem()))
+							NewTeam.add(temp);
+					}
 					setVisible(false);
 					dispose();
 					new YourFrame(Myteam);	
 				}
 			});
-			if(grade == 1) {
+			if(grade1 == 1) {
 				jb.setEnabled(true);
 			}
 			else {
