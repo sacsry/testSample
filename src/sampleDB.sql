@@ -11,6 +11,16 @@ CREATE TABLE `sunsu_data` (
   `전략` int DEFAULT NULL,
   `물량` int DEFAULT NULL,
   `수비력` int DEFAULT NULL,
-  `등급` text
+  `등급` text,
+  `승` int DEFAULT NULL,
+  `패` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=euckr;
-
+CREATE TABLE `map` (
+  `맵이름` text NOT NULL,
+  `Terran` int NOT NULL,
+  `Z1` int NOT NULL,
+  `Zerg` int NOT NULL,
+  `P1` int NOT NULL,
+  `Protoss` int NOT NULL,
+  `T1` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=euckr;
