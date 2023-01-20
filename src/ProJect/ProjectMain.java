@@ -63,6 +63,9 @@ public class ProjectMain extends JFrame {
 	String yourACECARD = "ACE";
 	String ACECARD = "ACE";
 	
+	private JLabel[] winla = new JLabel[2]; 
+	private JLabel[] losela = new JLabel[2];
+	
 	private JList anotherTeamJList = new JList();
 
 	String type1;
@@ -102,6 +105,10 @@ public class ProjectMain extends JFrame {
 	public ProjectMain() {
 		JButton resetBtn = new JButton("R");
 		Victorycount = 0;
+		for(int i = 0; i<2;i++) {
+			winla[i] = new JLabel("");
+			losela[i] = new JLabel("");
+			}
 		setTitle("MyStarCraft");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //		setResizable(false);
@@ -267,22 +274,47 @@ public class ProjectMain extends JFrame {
 	class DrawPanel extends JPanel {
 		JLabel la = new JLabel();
 		JLabel victoryla = new JLabel(Victorycount +"회 연속 우승");
+		int wincount2;
+		int losecount2;
 
 		public void paint(Graphics g) {
 			super.paint(g);
+			setLayout(null);
 			la.setText("준플레이오프");
+			
+			
+			for(int i = 0; i<2; i++) {
+			winla[i].setFont(new Font("승리 카운트", Font.ITALIC, 20));
+			losela[i].setFont(new Font("승리 카운트", Font.ITALIC, 20));
+			winla[i].setForeground(Color.WHITE);
+			losela[i].setForeground(Color.WHITE);
+			}
+			
+			
 			g.setColor(Color.GREEN);
 			g.drawLine(160, 750, 160, 550);
 			g.setColor(Color.gray);
 			if (a == 2) {
 				la.setText("결승");
 				g.setColor(Color.green);
+				winla[1].setText(wincount1+"");
+				losela[1].setText(losecount1+"");
+				winla[0].setBounds(280,500,50,50);
+				losela[0].setBounds(330,500,50,50);
+				winla[1].setBounds(505,360,50,50);
+				losela[1].setBounds(555,360,50,50);
 			}
 			g.drawLine(535, 400, 535, 250);
 			g.drawLine(310, 400, 535, 400);
 			if (a == 1) {
+				wincount2 = wincount1;
+				losecount2 = losecount1;
 				la.setText("플레이오프");
 				g.setColor(Color.green);
+				winla[0].setText(wincount2+"");
+				losela[0].setText(losecount2+"");
+				winla[0].setBounds(280,500,50,50);
+				losela[0].setBounds(330,500,50,50);
 			}
 			g.drawLine(160, 550, 310, 550);
 			g.drawLine(310, 550, 310, 400);
@@ -295,12 +327,16 @@ public class ProjectMain extends JFrame {
 			g.drawLine(535, 250, 1060, 250);
 			g.setColor(Color.WHITE);
 			g.drawLine(1060, 750, 1060, 250);
-			victoryla.setBounds(500,0,150,150);
+			victoryla.setBounds(700,100,300,150);
 			victoryla.setFont(new Font("우승", Font.ITALIC, 30));
 			victoryla.setForeground(Color.green);
-			la.setBounds(200, 0, 150, 150);
+			la.setBounds(400, 0, 500, 150);
 			la.setFont(new Font("포스트시즌", Font.ITALIC, 50));
 			la.setForeground(Color.WHITE);
+			add(winla[0]);
+			add(losela[0]);
+			add(winla[1]);
+			add(losela[1]);
 			add(victoryla);
 			add(la);
 		}
@@ -1535,6 +1571,10 @@ public class ProjectMain extends JFrame {
 						winLabel1[i].setText("");
 						loseLabel1[i].setText("");
 					}
+					for(int i = 0; i<2;i++) {
+						winla[i] = new JLabel("");
+						losela[i] = new JLabel("");
+						}
 					randomteam();
 					NewTeam = new ArrayList<String>();
 					for (String temp : Team) {

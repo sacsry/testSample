@@ -49,10 +49,10 @@ public class sunsu {
 																											// 연결
 			
 			stmt = conn.createStatement(); // SQL문 처리용 Statement 객체 생성
-			ResultSet srs = stmt.executeQuery("SELECT * FROM sunsu_data"); // 테이블의 모든 데이터 검색
+//			ResultSet srs = stmt.executeQuery("SELECT * FROM sunsu_data"); // 테이블의 모든 데이터 검색
 
 			new sunsu(name);
-			srs = stmt.executeQuery("SELECT * FROM sunsu_data where 이름 = '" + name + "'");// 테이블의 모든 데이터 검색
+			ResultSet srs = stmt.executeQuery("SELECT * FROM sunsu_data where 이름 = '" + name + "'");// 테이블의 특정 선수 데이터 검색
 			while(srs.next()) {
 				type = srs.getString("종족");
 				atk = Integer.parseInt(srs.getString("공격력"));
