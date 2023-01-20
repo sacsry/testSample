@@ -26,9 +26,10 @@ public class test {
 //		
 		
 		
-		MapChoice choice = new MapChoice();
-		System.out.print(choice.getNewMap().get(0));
-		System.out.print(choice.getNewMap().get(1));
+		Recorddata rec = new Recorddata("이영호");
+		rec.searchRecorddata();
+		System.out.print(rec.getAnotherplayer());
+		
 		
 
 		

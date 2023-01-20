@@ -100,9 +100,13 @@ public class ProjectMain extends JFrame {
 
 	
 	boolean WIN ;
-	boolean Lose;
+	boolean Lose ;
 	
 	public ProjectMain() {
+		sunsu sun = new sunsu();
+		sun.recordreset();
+		Recorddata rec = new Recorddata();
+		rec.deleteRecorddata();
 		JButton resetBtn = new JButton("R");
 		Victorycount = 0;
 		for(int i = 0; i<2;i++) {
@@ -140,7 +144,7 @@ public class ProjectMain extends JFrame {
 				try {
 					String str;
 					BufferedReader br = new BufferedReader(
-							new FileReader("C:\\Users\\tj-bu-12\\Desktop\\" + Item + ".txt")); // 불러올 파일이름
+							new FileReader("src/" + Item + ".txt")); // 불러올 파일이름
 					v.clear();
 					while ((str = br.readLine()) != null) {
 
@@ -345,6 +349,7 @@ public class ProjectMain extends JFrame {
 	class YourFrame extends JFrame {
 
 		private JButton resetBtn = new JButton("R");
+		private JButton dataBtn = new JButton("선수 정보");
 
 		public YourFrame(String Myteam) {
 			
@@ -400,7 +405,19 @@ public class ProjectMain extends JFrame {
 			teamLabel3.setBounds(1000, 700, 150, 100);
 			resetBtn.setBounds(0, 0, 50, 50);
 			strBtn1.setBounds(550, 900, 100, 30);
+			dataBtn.setBounds(250, 900, 150, 30);
 
+			dataBtn.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					setVisible(false);
+					dispose();
+					new sunsudata(Myteam);
+				}
+			});
+			c.add(dataBtn);
 			c.add(teamLabel);
 			c.add(teamLabel1);
 			c.add(teamLabel2);
@@ -411,6 +428,89 @@ public class ProjectMain extends JFrame {
 			setVisible(true);
 		}
 
+	}
+	
+	///////////////////////////////////////////////////////////////////////////////////
+	
+	///////////////////////////////////////////////////////////////////////////////////
+	class sunsudata extends JFrame{
+		
+		private int win;
+		private int lose;
+		ArrayList<String> vsWIN ;
+		ArrayList<String> vsLose ;
+		ArrayList<String> MapWIN ;
+		ArrayList<String> MapLose ;
+		public sunsudata(String Myteam) {
+		
+			setTitle("Mystarcraft");
+			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			Container c = getContentPane();
+			c.setLayout(null);
+			c.setBackground(Color.black);
+			
+			member1JList.setBounds(350, 350, 150, 400);
+			JLabel sunsu1 = new JLabel();
+			JLabel sunsu1name = new JLabel();
+			JLabel recordlabel = new JLabel();
+			member1JList.addMouseListener(new MouseAdapter() {
+				public void mouseClicked(MouseEvent e) {
+
+					JList jl = (JList) e.getSource();
+					String name = (String) jl.getSelectedValue();
+					String name1 = name.trim();
+
+					
+					
+					sunsu mysunsu = new sunsu(name1);
+					mysunsu.data();
+					win = mysunsu.getWincount();
+					lose = mysunsu.getLosecount();
+					
+					recordlabel.setText("총 전적:    "+win +"   승   "+lose+"   패    ("+((double)win/(double)(win+lose))*100+")%");
+					recordlabel.setForeground(Color.white);
+					recordlabel.setBounds(600,250,500,100);
+					recordlabel.setFont(new Font("전적라벨",Font.BOLD,30));
+					
+					ImageIcon icon = new ImageIcon("images/" + name1 + ".gif");
+					
+					sunsu1.setIcon(icon);
+					sunsu1name.setText(name1);
+					sunsu1name.setForeground(Color.white);
+
+				}
+			});
+			
+			
+			JButton backBtn1 = new JButton("<<back");
+			backBtn1.setBounds(550, 900, 100, 30);
+			backBtn1.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					setVisible(false);
+					dispose();
+					new YourFrame(Myteam);
+
+				}
+			});
+			
+			statlabel.setVisible(false);
+			statlabel.setBounds(120, 500, 150, 150);
+			c.add(statlabel);
+			sunsu1.setBounds(120, 380, 100, 100);
+			sunsu1name.setBounds(140, 450, 100, 100);
+			
+			c.add(recordlabel);
+			c.add(backBtn1);
+			c.add(member1JList);
+			c.add(sunsu1);
+			c.add(sunsu1name);
+			setSize(1200,1000);
+			setVisible(true);
+			
+		}
 	}
 /////////////////////////////////////////////////////////////////////////////////////////
 
@@ -513,9 +613,15 @@ public class ProjectMain extends JFrame {
 			});
 
 			JButton jb = new JButton("엔트리 제출");
-			jb.setBounds(545, 810, 150, 40);
+			jb.setBounds(475, 810, 150, 40);
 			JButton strBtn1 = new JButton("시작");
 			strBtn1.setEnabled(false);
+			
+			JButton jb1 = new JButton("엔트리 재설정");
+			jb1.setBounds(625, 810, 150, 40);
+			jb1.setEnabled(false);
+			c.add(jb1);
+			
 			jb.addActionListener(new ActionListener() {
 
 				@Override
@@ -535,6 +641,10 @@ public class ProjectMain extends JFrame {
 
 							} else {
 								strBtn1.setEnabled(true);
+								for(int k = 0; k<4;k++) {
+								setbtn[k].setEnabled(false);
+								}
+								jb1.setEnabled(true);
 								strBtn1.setText("경기 시작");
 							}
 
@@ -550,6 +660,19 @@ public class ProjectMain extends JFrame {
 
 					}
 
+				}
+			});
+			
+			jb1.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					jb1.setEnabled(false);
+					strBtn1.setEnabled(false);
+					for(int k = 0; k<4;k++) {
+						setbtn[k].setEnabled(true);
+						}
 				}
 			});
 
@@ -635,7 +758,7 @@ public class ProjectMain extends JFrame {
 			try {
 				String str;
 				BufferedReader br = new BufferedReader(
-						new FileReader("C:\\Users\\tj-bu-12\\Desktop\\" + NewTeam.get(num[a]) + ".txt")); // 불러올 파일이름
+						new FileReader("src/" + NewTeam.get(num[a]) + ".txt")); // 불러올 파일이름
 				v1.clear();
 				while ((str = br.readLine()) != null) {
 
@@ -1098,6 +1221,7 @@ public class ProjectMain extends JFrame {
 			int winrate = r1.nextInt(100);
 			int winrate1 = (int)((double)((sum1+(mapwinrate*50))*100)/((double)sum3/1.2));
 			
+			
 			strBtn1.addActionListener(new ActionListener() {
 
 				@Override
@@ -1120,6 +1244,11 @@ public class ProjectMain extends JFrame {
 						loseLabel1[count].setForeground(Color.red);
 						WIN = true;
 						Lose = false;
+						a1.record(sunsu1,WIN);
+						a2.record(sunsu2,Lose);
+						Recorddata record1 = new Recorddata();
+						record1.insertRecorddata(sunsu1,sunsu2,NewMap.get(count));
+						
 
 					}
 					
@@ -1132,8 +1261,13 @@ public class ProjectMain extends JFrame {
 						loseLabel1[count].setText("WIN");
 						winLabel1[count].setForeground(Color.red);
 						loseLabel1[count].setForeground(Color.green);
-						WIN = false;
 						Lose = true;
+						WIN = false;
+						a1.record(sunsu1,WIN);
+						a2.record(sunsu2,Lose);
+						Recorddata record2 = new Recorddata();
+						record2.insertRecorddata(sunsu2,sunsu1,NewMap.get(count));
+						
 					}
 
 					count1 = count + 1;
@@ -1165,7 +1299,7 @@ public class ProjectMain extends JFrame {
 						yourACECARD = "ACE";
 
 						if (a == 3) {
-							Victorycount++;
+							
 							setVisible(false);
 							dispose();
 							new loseFrame(Myteam, 1);
@@ -1587,10 +1721,10 @@ public class ProjectMain extends JFrame {
 				}
 			});
 			if(grade1 == 1) {
-				jb.setEnabled(true);
+				Victorycount++;
 			}
 			else {
-				jb.setEnabled(false);
+				Victorycount = 0;
 			}
 
 			resetBtn.setBounds(0, 0, 50, 50);

@@ -1,4 +1,13 @@
 CREATE DATABASE `sampledb` /*!40100 DEFAULT CHARACTER SET euckr */ /*!80016 DEFAULT ENCRYPTION='N' */;
+
+
+CREATE TABLE `recorddata12` (
+  `검색선수` varchar(45) DEFAULT NULL,
+  `상대선수` varchar(45) DEFAULT NULL,
+  `맵` varchar(45) DEFAULT NULL,
+  `결과` varchar(5) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 CREATE TABLE `sunsu_data` (
   `순위` int DEFAULT NULL,
   `이름` text,

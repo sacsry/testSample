@@ -13,9 +13,26 @@ public class sunsu {
 	int tectics;
 	int sense;
 	int supply;
-	int win;
-	int lose;
+	int wincount;
+	int losecount;
 	
+	
+	public int getWincount() {
+		return wincount;
+	}
+
+	public void setWincount(int wincount) {
+		this.wincount = wincount;
+	}
+
+	public int getLosecount() {
+		return losecount;
+	}
+
+	public void setLosecount(int losecount) {
+		this.losecount = losecount;
+	}
+
 	String grade;
 	
 	
@@ -39,10 +56,10 @@ public class sunsu {
 //			System.out.println("SQL 실행오류");
 //		}
 //	}
-	
+	Connection conn;
+	Statement stmt = null;
 	public void data(){
-		Connection conn;
-		Statement stmt = null;
+		
 		try {
 			Class.forName("com.mysql.jdbc.Driver"); // MySQL 드라이버 로드
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sampledb", "root", "test123"); // JDBC
@@ -62,12 +79,69 @@ public class sunsu {
 				sense = Integer.parseInt(srs.getString("센스"));
 				supply = Integer.parseInt(srs.getString("물량"));
 				grade = srs.getString("등급");
-				
+				wincount = Integer.parseInt(srs.getString("승"));
+				losecount = Integer.parseInt(srs.getString("패"));
 			}
 		} catch (ClassNotFoundException e1) {
 			System.out.println("JDBC 드라이버 로드 오류");
 		} catch (SQLException e2) {
-			System.out.println("SQL 실행오류");
+			System.out.println("SQL 실행오류3");
+		}
+	}
+	
+	public void record(String name,boolean record) {
+		try {
+			Class.forName("com.mysql.jdbc.Driver"); // MySQL 드라이버 로드
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sampledb", "root", "test123"); // JDBC
+																											// 연결
+			
+			stmt = conn.createStatement(); // SQL문 처리용 Statement 객체 생성
+			new sunsu(name);
+			ResultSet srs = stmt.executeQuery("SELECT * FROM sunsu_data where 이름 = '" + name + "'");// 테이블의 특정 선수 데이터 검색
+			int win = 0;
+			int lose = 0;
+			while(srs.next()) {
+			win = Integer.parseInt(srs.getString("승"));
+			lose = Integer.parseInt(srs.getString("패"));
+			}
+			
+			if(record == true) {
+				win++;
+				stmt.executeUpdate("update sunsu_data set 승 = "+win+" where 이름 = '"+name+"'");
+			}
+			else if(record == false){
+				lose++;
+				stmt.executeUpdate("update sunsu_data set 패 = "+lose+" where 이름 = '"+name+"'");
+			}
+		} catch (ClassNotFoundException e1) {
+			System.out.println("JDBC 드라이버 로드 오류");
+		} catch (SQLException e2) {
+			System.out.println("SQL 실행오류2");
+		}
+		
+	}
+	
+	public void recordreset() {
+		try {
+			Class.forName("com.mysql.jdbc.Driver"); // MySQL 드라이버 로드
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sampledb", "root", "test123"); // JDBC
+																											// 연결
+			
+			stmt = conn.createStatement(); // SQL문 처리용 Statement 객체 생성
+			new sunsu(name);
+			ResultSet srs = stmt.executeQuery("SELECT * FROM sunsu_data");// 테이블의 특정 선수 데이터 검색
+			int win = 0;
+			int lose = 0;
+			while(srs.next()) {
+			win = Integer.parseInt(srs.getString("승"));
+			lose = Integer.parseInt(srs.getString("패"));
+			stmt.executeUpdate("update sunsu_data set 승 = "+0+"");
+			stmt.executeUpdate("update sunsu_data set 패 = "+0+"");
+			}
+		} catch (ClassNotFoundException e1) {
+			System.out.println("JDBC 드라이버 로드 오류");
+		} catch (SQLException e2) {
+			System.out.println("SQL 실행오류1");
 		}
 	}
 	public sunsu() {
@@ -150,20 +224,6 @@ public class sunsu {
 		this.grade = grade;
 	}
 	
-	public int getWin() {
-		return win;
-	}
-
-	public void setWin(int win) {
-		this.win = win;
-	}
-	public int getLose() {
-		return lose;
-	}
-
-	public void setLose(int lose) {
-		this.lose = lose;
-	}
 	
 	
 }
