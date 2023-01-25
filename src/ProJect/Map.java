@@ -1,13 +1,8 @@
 package ProJect;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class Map {
-
 	String Mapname;
 	int MyTerranwinrate;
 	int MyZergwinrate;
@@ -16,19 +11,18 @@ public class Map {
 	int YourZergwinrate;
 	int YourProtosswinrate;
 	
+	Connection conn = null;
+	Statement stmt = null;
+	String url = "jdbc:mysql://localhost:3306/sampledb";
+	String user = "root";
+	String password = "test123";
 	
-	public void data() {
-		Connection conn;
-		Statement stmt = null;
+	public void data(String mapname) {
+		
+		Mapname = mapname;
+		ResultSet srs;
 		try {
-			Class.forName("com.mysql.jdbc.Driver"); // MySQL 드라이버 로드
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sampledb", "root", "test123"); // JDBC
-																											// 연결
-			
-			stmt = conn.createStatement(); // SQL문 처리용 Statement 객체 생성
-			ResultSet srs = stmt.executeQuery("SELECT * FROM map"); // 테이블의 모든 데이터 검색
-			new Map(Mapname);
-			srs = stmt.executeQuery("SELECT * FROM map where 맵이름 = '" + Mapname + "'");// 테이블의 모든 데이터 검색
+			srs = stmt.executeQuery("SELECT * FROM map where 맵이름 = '" + Mapname + "'");
 			while(srs.next()) {
 				Mapname = srs.getString("맵이름");
 				MyTerranwinrate = Integer.parseInt(srs.getString("Terran"));
@@ -38,18 +32,18 @@ public class Map {
 				YourTerranwinrate = Integer.parseInt(srs.getString("T1"));
 				YourZergwinrate = Integer.parseInt(srs.getString("Z1"));
 				}
-			
-		} catch (ClassNotFoundException e1) {
-			System.out.println("JDBC 드라이버 로드 오류");
-		} catch (SQLException e2) {
-			System.out.println("SQL 실행오류");
-		}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}// 테이블의 모든 데이터 검색
+		
 	}
 	public String getMapname() {
 		return Mapname;
 	}
 	public void setMapname(String mapname) {
-		Mapname = mapname;
+		
+		
 	}
 	public int getMyTerranwinrate() {
 		return MyTerranwinrate;
@@ -88,9 +82,18 @@ public class Map {
 		YourProtosswinrate = yourProtosswinrate;
 	}
 	public Map() {
-		
+		try {
+			Class.forName("com.mysql.jdbc.Driver"); // MySQL 드라이버 로드
+			conn = DriverManager.getConnection(url, user, password); // JDBC 연결
+			stmt = conn.createStatement(); // SQL문 처리용 Statement 객체 생성
+			ResultSet srs = stmt.executeQuery("SELECT * FROM map"); // 테이블의 모든 데이터 검색
+			
+			
+		} catch (ClassNotFoundException e1) {
+			System.out.println("JDBC 드라이버 로드 오류");
+		} catch (SQLException e2) {
+			System.out.println("SQL 실행오류");
+		}
 	}
-	public Map(String Mapname) {
-		this.Mapname = Mapname;
-	}
+	
 }

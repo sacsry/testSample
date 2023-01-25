@@ -3,9 +3,6 @@ package ProJect;
 import java.sql.*;
 
 public class sunsu {
-	
-	
-	static String name = null;
 	String type;
 	int atk ;
 	int def;
@@ -15,60 +12,39 @@ public class sunsu {
 	int supply;
 	int wincount;
 	int losecount;
-	
-	
-	public int getWincount() {
-		return wincount;
-	}
-
-	public void setWincount(int wincount) {
-		this.wincount = wincount;
-	}
-
-	public int getLosecount() {
-		return losecount;
-	}
-
-	public void setLosecount(int losecount) {
-		this.losecount = losecount;
-	}
-
+	int vsTwincount;
+	int vsZwincount;
+	int vsPwincount;
+	int vsTlosecount;
+	int vsZlosecount;
+	int vsPlosecount;
 	String grade;
-	
-	
-//	public static void main(String args[]) {
-//		Connection conn;
-//		Statement stmt = null;
-//		
-//		try {
-//			Class.forName("com.mysql.jdbc.Driver"); // MySQL 드라이버 로드
-//			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sampledb", "root", "test123"); // JDBC 연결
-//			System.out.println("DB 연결 완료");
-//			stmt = conn.createStatement(); // SQL문 처리용 Statement 객체 생성
-//			ResultSet srs = stmt.executeQuery("SELECT * FROM sunsu_data"); // 테이블의 모든 데이터 검색
-//			new sunsu("고강민");
-//			srs = stmt.executeQuery("SELECT * FROM sunsu_data where 선수 = '"+name+"'");// 테이블의 모든 데이터 검색
-//			new sunsu(name,srs);
-////			printData(srs);
-//		} catch (ClassNotFoundException e) {
-//			System.out.println("JDBC 드라이버 로드 오류");
-//		} catch (SQLException e) {
-//			System.out.println("SQL 실행오류");
-//		}
-//	}
-	Connection conn;
+	Connection conn = null;
 	Statement stmt = null;
-	public void data(){
-		
+	String url = "jdbc:mysql://localhost:3306/sampledb";
+	String user = "root";
+	String password = "test123";
+	
+	public sunsu() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver"); // MySQL 드라이버 로드
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sampledb", "root", "test123"); // JDBC
-																											// 연결
-			
+			conn = DriverManager.getConnection(url, user, password); // JDBC 연결
 			stmt = conn.createStatement(); // SQL문 처리용 Statement 객체 생성
 //			ResultSet srs = stmt.executeQuery("SELECT * FROM sunsu_data"); // 테이블의 모든 데이터 검색
 
-			new sunsu(name);
+			
+
+		} catch (ClassNotFoundException e1) {
+			System.out.println("JDBC 드라이버 로드 오류");
+		} catch (SQLException e2) {
+			System.out.println("SQL 실행오류3");
+		}
+	}
+	
+	public void data(String name){
+		
+		try {
+			
 			ResultSet srs = stmt.executeQuery("SELECT * FROM sunsu_data where 이름 = '" + name + "'");// 테이블의 특정 선수 데이터 검색
 			while(srs.next()) {
 				type = srs.getString("종족");
@@ -81,22 +57,71 @@ public class sunsu {
 				grade = srs.getString("등급");
 				wincount = Integer.parseInt(srs.getString("승"));
 				losecount = Integer.parseInt(srs.getString("패"));
+				vsTwincount=Integer.parseInt(srs.getString("vsT승"));;
+				vsZwincount=Integer.parseInt(srs.getString("vsZ승"));;
+				vsPwincount=Integer.parseInt(srs.getString("vsP승"));;
+				vsTlosecount=Integer.parseInt(srs.getString("vsT패"));;
+				vsZlosecount=Integer.parseInt(srs.getString("vsZ패"));;
+				vsPlosecount=Integer.parseInt(srs.getString("vsP패"));;
+				
+				
 			}
-		} catch (ClassNotFoundException e1) {
+		} catch (Exception e1) {
 			System.out.println("JDBC 드라이버 로드 오류");
-		} catch (SQLException e2) {
-			System.out.println("SQL 실행오류3");
-		}
+		} 
 	}
 	
-	public void record(String name,boolean record) {
+	public int getVsTwincount() {
+		return vsTwincount;
+	}
+
+	public void setVsTwincount(int vsTwincount) {
+		this.vsTwincount = vsTwincount;
+	}
+
+	public int getVsZwincount() {
+		return vsZwincount;
+	}
+
+	public void setVsZwincount(int vsZwincount) {
+		this.vsZwincount = vsZwincount;
+	}
+
+	public int getVsPwincount() {
+		return vsPwincount;
+	}
+
+	public void setVsPwincount(int vsPwincount) {
+		this.vsPwincount = vsPwincount;
+	}
+
+	public int getVsTlosecount() {
+		return vsTlosecount;
+	}
+
+	public void setVsTlosecount(int vsTlosecount) {
+		this.vsTlosecount = vsTlosecount;
+	}
+
+	public int getVsZlosecount() {
+		return vsZlosecount;
+	}
+
+	public void setVsZlosecount(int vsZlosecount) {
+		this.vsZlosecount = vsZlosecount;
+	}
+
+	public int getVsPlosecount() {
+		return vsPlosecount;
+	}
+
+	public void setVsPlosecount(int vsPlosecount) {
+		this.vsPlosecount = vsPlosecount;
+	}
+
+	public void record(String name,boolean record, String type) {
 		try {
-			Class.forName("com.mysql.jdbc.Driver"); // MySQL 드라이버 로드
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sampledb", "root", "test123"); // JDBC
-																											// 연결
 			
-			stmt = conn.createStatement(); // SQL문 처리용 Statement 객체 생성
-			new sunsu(name);
 			ResultSet srs = stmt.executeQuery("SELECT * FROM sunsu_data where 이름 = '" + name + "'");// 테이블의 특정 선수 데이터 검색
 			int win = 0;
 			int lose = 0;
@@ -107,28 +132,59 @@ public class sunsu {
 			
 			if(record == true) {
 				win++;
-				stmt.executeUpdate("update sunsu_data set 승 = "+win+" where 이름 = '"+name+"'");
+				int vsTwin=0;
+				int vsZwin=0;
+				int vsPwin=0;
+				
+				if(type.equals("Terran")) {
+					vsTwin++;
+					stmt.executeUpdate("update sunsu_data set 승 = "+win+" where 이름 = '"+name+"'");
+					stmt.executeUpdate("update sunsu_data set vsT승 = "+vsTwin+" where 이름 = '"+name+"'");
+				}
+				if(type.equals("Zerg")) {
+					vsZwin++;
+					stmt.executeUpdate("update sunsu_data set 승 = "+win+" where 이름 = '"+name+"'");
+					stmt.executeUpdate("update sunsu_data set vsZ승 = "+vsZwin+" where 이름 = '"+name+"'");
+				}
+				if(type.equals("Protoss")) {
+					vsPwin++;
+					stmt.executeUpdate("update sunsu_data set 승 = "+win+" where 이름 = '"+name+"'");
+					stmt.executeUpdate("update sunsu_data set vsP승 = "+vsPwin+" where 이름 = '"+name+"'");
+				}
+				
 			}
 			else if(record == false){
 				lose++;
-				stmt.executeUpdate("update sunsu_data set 패 = "+lose+" where 이름 = '"+name+"'");
+				int vsTlose=0;
+				int vsZlose=0;
+				int vsPlose=0;
+				if(type.equals("Terran")) {
+					vsTlose++;
+					stmt.executeUpdate("update sunsu_data set 패 = "+lose+" where 이름 = '"+name+"'");
+					stmt.executeUpdate("update sunsu_data set vsT패 = "+vsTlose+" where 이름 = '"+name+"'");
+				}
+				if(type.equals("Zerg")) {
+					vsZlose++;
+					stmt.executeUpdate("update sunsu_data set 패 = "+lose+" where 이름 = '"+name+"'");
+					stmt.executeUpdate("update sunsu_data set vsZ패 = "+vsZlose+" where 이름 = '"+name+"'");
+					
+				}
+				if(type.equals("Protoss")) {
+					vsPlose++;
+					stmt.executeUpdate("update sunsu_data set 패 = "+lose+" where 이름 = '"+name+"'");
+					stmt.executeUpdate("update sunsu_data set vsP패 = "+vsPlose+" where 이름 = '"+name+"'");
+					
+				}
 			}
-		} catch (ClassNotFoundException e1) {
+		} catch (Exception e1) {
 			System.out.println("JDBC 드라이버 로드 오류");
-		} catch (SQLException e2) {
-			System.out.println("SQL 실행오류2");
-		}
+		} 
 		
 	}
 	
 	public void recordreset() {
 		try {
-			Class.forName("com.mysql.jdbc.Driver"); // MySQL 드라이버 로드
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sampledb", "root", "test123"); // JDBC
-																											// 연결
 			
-			stmt = conn.createStatement(); // SQL문 처리용 Statement 객체 생성
-			new sunsu(name);
 			ResultSet srs = stmt.executeQuery("SELECT * FROM sunsu_data");// 테이블의 특정 선수 데이터 검색
 			int win = 0;
 			int lose = 0;
@@ -137,28 +193,20 @@ public class sunsu {
 			lose = Integer.parseInt(srs.getString("패"));
 			stmt.executeUpdate("update sunsu_data set 승 = "+0+"");
 			stmt.executeUpdate("update sunsu_data set 패 = "+0+"");
+			stmt.executeUpdate("update sunsu_data set vsT승 = "+0+"");
+			stmt.executeUpdate("update sunsu_data set vsT패 = "+0+"");
+			stmt.executeUpdate("update sunsu_data set vsP승 = "+0+"");
+			stmt.executeUpdate("update sunsu_data set vsP패 = "+0+"");
+			stmt.executeUpdate("update sunsu_data set vsZ승 = "+0+"");
+			stmt.executeUpdate("update sunsu_data set vsZ패 = "+0+"");
 			}
-		} catch (ClassNotFoundException e1) {
+		} catch (Exception e1) {
 			System.out.println("JDBC 드라이버 로드 오류");
-		} catch (SQLException e2) {
-			System.out.println("SQL 실행오류1");
-		}
-	}
-	public sunsu() {
-		
-	}
-	public sunsu (String name){
-		this.name = name;
-		
+		} 
 	}
 	
-	public static String getName() {
-		return name;
-	}
+	
 
-	public static void setName(String name) {
-		sunsu.name = name;
-	}
 
 	public String getType() {
 		return type;
@@ -224,6 +272,20 @@ public class sunsu {
 		this.grade = grade;
 	}
 	
-	
-	
+	public int getWincount() {
+		return wincount;
+	}
+
+	public void setWincount(int wincount) {
+		this.wincount = wincount;
+	}
+
+	public int getLosecount() {
+		return losecount;
+	}
+
+	public void setLosecount(int losecount) {
+		this.losecount = losecount;
+	}
+
 }
