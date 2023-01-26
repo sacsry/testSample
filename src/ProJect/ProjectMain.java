@@ -38,8 +38,11 @@ public class ProjectMain extends JFrame {
 	int tectics1;
 	int sense1;
 	int supply1;
+	int recon1;
+	int keep1;
 	String grade1;
 	int sum1;
+	
 	/////////////////우리팀 스탯///////////////////
 	
 	String type2;
@@ -50,6 +53,8 @@ public class ProjectMain extends JFrame {
 	int sense2;
 	int supply2;
 	int sum2;
+	int recon2;
+	int keep2;
 	String grade2;
 	
 	int season = 1;
@@ -57,6 +62,9 @@ public class ProjectMain extends JFrame {
 	
 	JLabel statlabel = new JLabel();
 	JLabel statlabel2 = new JLabel();
+	JPanel statpanel = new JPanel();
+	JPanel statpanel2 = new JPanel();
+	
 	//////////////////////스텟 라벨////////////////
 	JLabel sunsu1 = new JLabel();
 	JLabel sunsu1name = new JLabel();
@@ -137,9 +145,14 @@ public class ProjectMain extends JFrame {
 			losela[i] = new JLabel("");
 		}/////////////////대진표 스코어 라벨 생성//////////////////
 
-		statlabel.setBounds(600, 370, 150, 150);
-		c.add(statlabel);
+//		statlabel.setBounds(600, 390, 150, 150);
+//		c.add(statlabel);
+		Drawlabel draw = new Drawlabel(this);
+		draw.setLayout(null);
+		draw.setBounds(600, 450, 300, 300);
+//		statpanel.setBackground(Color.black);
 		
+		c.add(draw);
 		JLabel logolabel = new JLabel();
 		TeamCombo.addActionListener(new ActionListener() {
 			
@@ -149,9 +162,10 @@ public class ProjectMain extends JFrame {
 				JComboBox<String> t = (JComboBox<String>) e.getSource();
 				Object Item = t.getSelectedItem();
 
-				statlabel.setVisible(false);
-				la1.setVisible(false);
-				la2.setVisible(false);
+				
+//				statlabel.setVisible(true);
+//				la1.setVisible(false);
+//				la2.setVisible(true);
 				try {
 					String str;
 					BufferedReader br = new BufferedReader(new FileReader("src/" + Item + ".txt")); // 불러올
@@ -168,8 +182,30 @@ public class ProjectMain extends JFrame {
 				} catch (IOException e2) {
 					e2.printStackTrace();
 				}
-				ImageIcon icon = new ImageIcon("images/로고/" + Item + ".gif");
-				logolabel.setIcon(icon);
+				ImageIcon icon1 = new ImageIcon("images/" + v.get(0).trim() + ".gif");
+				la1.setIcon(icon1);
+				la2.setText(v.get(0).trim());
+				la2.setForeground(Color.white);
+				sunsudb.data(v.get(0).trim());
+				atk1 = sunsudb.getAtk();
+				def1 = sunsudb.getDef();
+				tectics1 = sunsudb.getTectics();
+				sense1 = sunsudb.getSense();
+				supply1 = sunsudb.getSupply();
+				control1 = sunsudb.getControl();
+				type1 = sunsudb.getType();
+				recon1 = sunsudb.getRecon();
+				keep1 = sunsudb.getKeep();
+				grade1 = sunsudb.getGrade();
+
+//				statlabel.setVisible(true);
+//				statlabel.setText("<html><body><center>공격력: " + atk1 + "<br>수비력: " + def1 + "<br>전략: " + tectics1
+//						+ "<br>센스: " + sense1 + "<br>물량: " + supply1 + "<br>컨트롤: " + control1 
+//						+"<br>견제: " + keep1 + "<br>정찰: " + recon1 + "<br>종족: " + type1+ "</center></body></html>");
+//
+//				statlabel.setForeground(Color.white);
+//				statlabel.setBackground(Color.black);
+
 				Myteam = (String) TeamCombo.getSelectedItem();
 				Teamname.setText(Myteam);
 				
@@ -204,7 +240,7 @@ public class ProjectMain extends JFrame {
 		
 		
 		member1JList.setBounds(25, 25, 200, 400);
-		MyMouseListener listener = new MyMouseListener();
+		MyMouseListener listener = new MyMouseListener(this);
 		member1JList.addMouseListener(listener);
 //		member1JList.setBorder(new TitledBorder(new LineBorder(Color.green, 2), "선수들"));
 		//
@@ -255,6 +291,10 @@ public class ProjectMain extends JFrame {
 	}
 
 	class MyMouseListener extends MouseAdapter {
+		ProjectMain s;
+		public MyMouseListener(JFrame f) {
+			s = (ProjectMain)f;
+		}
 		public void mouseClicked(MouseEvent e) {
 		JList jl = (JList) e.getSource();
 		String name = (String) jl.getSelectedValue();
@@ -277,14 +317,21 @@ public class ProjectMain extends JFrame {
 		supply1 = sunsudb.getSupply();
 		control1 = sunsudb.getControl();
 		type1 = sunsudb.getType();
+		recon1 = sunsudb.getRecon();
+		keep1 = sunsudb.getKeep();
+		grade1 = sunsudb.getGrade();
+		
+		
+		
+		
 
-		statlabel.setVisible(true);
-		statlabel.setText("<html><body><center>공격력: " + atk1 + "<br>수비력: " + def1 + "<br>전략: " + tectics1
-				+ "<br>센스: " + sense1 + "<br>물량: " + supply1 + "<br>컨트롤: " + control1 + "<br>종족: " + type1
-				+ "</center></body></html>");
-
-		statlabel.setForeground(Color.white);
-		statlabel.setBackground(Color.black);
+//		statlabel.setVisible(true);
+//		statlabel.setText("<html><body><center>공격력: " + atk1 + "<br>수비력: " + def1 + "<br>전략: " + tectics1
+//				+ "<br>센스: " + sense1 + "<br>물량: " + supply1 + "<br>컨트롤: " + control1 
+//				+"<br>견제: " + keep1 + "<br>정찰: " + recon1+ "<br>종족: " + type1 + "</center></body></html>");
+//
+//		statlabel.setForeground(Color.white);
+//		statlabel.setBackground(Color.black);
 
 	}
 	}

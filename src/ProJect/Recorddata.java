@@ -36,21 +36,16 @@ public class Recorddata {
 		}
 	}
 	
-	public void insertRecorddata(String winner,String loser,String map){
+	public void insertRecorddata(String winner,String loser,String type1,String type2,String map){
 		try {
 
 
-			sunsu winner1 = new sunsu();
-			winner1.data(winner);
-			sunsu loser1 = new sunsu();
-			loser1.data(loser);
-			stmt.executeUpdate("insert into recorddata12 (검색선수,검색선수종족, 상대선수,상대선수종족, 맵,결과) values (" + "'" + winner + "','" + winner1.getType()+ "','" +  loser + "','"+
-			loser1.getType()+ "','" + map + "','승');");
-			stmt.executeUpdate("insert into recorddata12 (검색선수,검색선수종족, 상대선수,상대선수종족, 맵,결과) values (" + "'" + loser + "','"+loser1.getType()+ "','" + winner + "','" + winner1.getType()+ "','" + map + "','패');");// 테이블의 특정 선수 데이터 검색
 			
-//			while(srs.next()) {
-//				
-//			}
+			stmt.executeUpdate("insert into recorddata12 (검색선수,검색선수종족, 상대선수,상대선수종족, 맵,결과) values (" + "'" + winner + "','" + type1+ "','" +  loser + "','"+
+			type2+ "','" + map + "','승');");
+			stmt.executeUpdate("insert into recorddata12 (검색선수,검색선수종족, 상대선수,상대선수종족, 맵,결과) values (" + "'" + loser + "','"+type2+ "','" + winner + "','" + type1+ "','" + map + "','패');");// 테이블의 특정 선수 데이터 검색
+			
+
 		} catch (Exception e1) {
 			
 		} 
@@ -88,9 +83,7 @@ public class Recorddata {
 				vsTwin = 0;
 				vsTlose = 0;
 				vsPwin =0;
-				
 				vsPlose = 0;
-				
 				vsZwin = 0;
 				vsZlose = 0;
 				

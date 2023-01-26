@@ -86,13 +86,17 @@ public class Battle extends JFrame {
 		s.supply1 = s.sunsudb.getSupply();
 		s.control1 = s.sunsudb.getControl();
 		s.type1 = s.sunsudb.getType();
-		s.sum1 = s.atk1 + s.def1 + s.control1 + s.tectics1 + s.sense1 + s.supply1;
+		s.recon1 = s.sunsudb.getRecon();
+		s.keep1 = s.sunsudb.getKeep();
+		s.sum1 = s.atk1 + s.def1 + s.control1 + s.tectics1 + s.sense1 + s.supply1+s.recon1+s.keep1;
 		sum1 = s.sum1;
 
 		s.statlabel.setVisible(true);
-		s.statlabel.setText("<html><body><center>공격력: " + s.atk1 + "<br>수비력: " + s.def1 + "<br>전략: " + s.tectics1
-				+ "<br>센스: " + s.sense1 + "<br>물량: " + s.supply1 + "<br>컨트롤: " + s.control1 + "<br>종족: " + s.type1
-				+ "</center></body></html>");
+		
+		s.statlabel.setText("<html><body><center>공격력: " + s.atk1 + "<br>수비력: " + s.def1 + "<br>전략: "
+				+ s.tectics1 + "<br>센스: " + s.sense1 + "<br>물량: " + s.supply1 + "<br>컨트롤: " + s.control1
+				+ "<br>견제: " + s.keep1 + "<br>정찰: " + s.recon1
+				+"<br>종족: " + s.type1 + "</center></body></html>");
 
 		s.statlabel.setForeground(Color.white);
 		s.statlabel.setBackground(Color.black);
@@ -108,13 +112,17 @@ public class Battle extends JFrame {
 		s.supply2 = s.sunsudb.getSupply();
 		s.control2 = s.sunsudb.getControl();
 		s.type2 = s.sunsudb.getType();
-		s.sum2 = s.atk2 + s.def2 + s.control2 + s.tectics2 + s.sense2 + s.supply2;
+		s.recon2 = s.sunsudb.getRecon();
+		s.keep2 = s.sunsudb.getKeep();
+		
+		
+		s.sum2 = s.atk2 + s.def2 + s.control2 + s.tectics2 + s.sense2 + s.supply2+s.keep2+s.recon2;
 		sum2 = s.sum2;
 
-		s.statlabel2.setVisible(true);
-		s.statlabel2.setText("<html><body><center>공격력: " + s.atk2 + "<br>수비력: " + s.def2 + "<br>전략: " + s.tectics2
-				+ "<br>센스: " + s.sense2 + "<br>물량: " + s.supply2 + "<br>컨트롤: " + s.control2 + "<br>종족: " + s.type2
-				+ "</center></body></html>");
+		s.statlabel2.setText("<html><body><center>공격력: " + s.atk2 + "<br>수비력: " + s.def2 + "<br>전략: "
+				+ s.tectics2 + "<br>센스: " + s.sense2 + "<br>물량: " + s.supply2 + "<br>컨트롤: " + s.control2
+				+ "<br>견제: " + s.keep2 + "<br>정찰: " + s.recon2
+				+"<br>종족: " + s.type2 + "</center></body></html>");
 
 		s.statlabel2.setForeground(Color.white);
 		s.statlabel2.setBackground(Color.black);
@@ -330,62 +338,6 @@ public class Battle extends JFrame {
 
 	}
 
-	class Person1 extends Thread {
-		private String name;
-		
-		ProjectMain s;
-		public Person1(String name, JFrame f) {
-			this.name = name;
-			s = (ProjectMain)f;
-		}
-
-		public void run() {
-
-			
-			try {
-
-				for (int i = 1; i <= 5; i++) {
-
-					
-					s.Text.append(name + " 문자중계 테스트" + i + "\n");
-					Thread.sleep(100);
-					
-				}
-
-
-			} catch (Exception e) {
-			}
-		}
-
-	}
-
-	class Person2 extends Thread {
-		private String name;
-		ProjectMain s;
-		
-		public Person2(String name, JFrame f) {
-			this.name = name;
-			s = (ProjectMain)f;
-		}
-		
-		public void run() {
-
-			try {
-
-				
-				for (int i = 1; i <= 5; i++) {
-					
-
-					s.Text.append(name + " 문자중계 테스트" + i + "\n");
-					Thread.sleep(100);
-
-				}
-
-			} catch (Exception e) {
-			}
-		}
-
-	}
 	
 
 	class ConsumerThread extends Thread{
@@ -409,7 +361,15 @@ public class Battle extends JFrame {
 		    	s.Text.append("결승 "+(s.count1+1)+"경기 시작했습니다.\n");
 		    }
 	    	
-	    	
+	    	if(s.type1.equals("Terran")){
+	    		s.Text.append(sunsu1+" 마린생산후 팩토리 올라갑니다\n");
+	    	}
+	    	if(s.type1.equals("Zerg")){
+	    		s.Text.append(sunsu1+" 12드론까지 눌렀어요\n");
+	    	}
+	    	if(s.type1.equals("Protoss")){
+	    		s.Text.append(sunsu1+" 질럿 생산후 코어 들어갑니다\n");
+	    	}
 	    	winLabel.setVisible(false);
 			loseLabel.setVisible(false);
 			strBtn1.setVisible(false);
@@ -452,7 +412,7 @@ public class Battle extends JFrame {
 				s.Lose = false;
 				s.sunsudb.record(sunsu1, s.WIN, s.type2);
 				s.sunsudb.record(sunsu2, s.Lose, s.type1);
-				s.recorddb.insertRecorddata(sunsu1, sunsu2, s.NewMap.get(count));
+				s.recorddb.insertRecorddata(sunsu1, sunsu2,s.type1,s.type2, s.NewMap.get(count));
 				s.money +=10;
 
 			}
@@ -470,7 +430,7 @@ public class Battle extends JFrame {
 				s.WIN = false;
 				s.sunsudb.record(sunsu1, s.WIN, s.type2);
 				s.sunsudb.record(sunsu2, s.Lose, s.type1);
-				s.recorddb.insertRecorddata(sunsu2, sunsu1, s.NewMap.get(count));
+				s.recorddb.insertRecorddata(sunsu2, sunsu1,s.type2,s.type1, s.NewMap.get(count));
 
 			}
 			if (s.WIN) {
@@ -509,6 +469,15 @@ public class Battle extends JFrame {
 	    }
 	    public void run(){
 	    	con2.setBarSize(50);
+	    	if(s.type2.equals("Terran")){
+	    		s.Text.append(sunsu2+" 마린생산후 팩토리 올라갑니다\n");
+	    	}
+	    	if(s.type2.equals("Zerg")){
+	    		s.Text.append(sunsu2+" 12드론까지 눌렀어요\n");
+	    	}
+	    	if(s.type2.equals("Protoss")){
+	    		s.Text.append(sunsu2+" 질럿 생산후 코어 들어갑니다\n");
+	    	}
 			while(con1.getBarSize()<100 && con2.getBarSize()<100){
 				
 	        	

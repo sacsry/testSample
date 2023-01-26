@@ -12,6 +12,8 @@ public class sunsu {
 	int supply;
 	int wincount;
 	int losecount;
+	int recon;
+	int keep;
 	int vsTwincount;
 	int vsZwincount;
 	int vsPwincount;
@@ -54,6 +56,8 @@ public class sunsu {
 				tectics = Integer.parseInt(srs.getString("전략"));
 				sense = Integer.parseInt(srs.getString("센스"));
 				supply = Integer.parseInt(srs.getString("물량"));
+				keep = Integer.parseInt(srs.getString("견제"));
+				recon = Integer.parseInt(srs.getString("정찰"));
 				grade = srs.getString("등급");
 				wincount = Integer.parseInt(srs.getString("승"));
 				losecount = Integer.parseInt(srs.getString("패"));
@@ -119,22 +123,48 @@ public class sunsu {
 		this.vsPlosecount = vsPlosecount;
 	}
 
+	public int getRecon() {
+		return recon;
+	}
+
+	public void setRecon(int recon) {
+		this.recon = recon;
+	}
+
+	public int getKeep() {
+		return keep;
+	}
+
+	public void setKeep(int keep) {
+		this.keep = keep;
+	}
+
 	public void record(String name,boolean record, String type) {
 		try {
 			
 			ResultSet srs = stmt.executeQuery("SELECT * FROM sunsu_data where 이름 = '" + name + "'");// 테이블의 특정 선수 데이터 검색
 			int win = 0;
 			int lose = 0;
+			int vsTlose=0;
+			int vsZlose=0;
+			int vsPlose=0;
+			int vsTwin=0;
+			int vsZwin=0;
+			int vsPwin=0;
 			while(srs.next()) {
 			win = Integer.parseInt(srs.getString("승"));
 			lose = Integer.parseInt(srs.getString("패"));
+			vsTwin = Integer.parseInt(srs.getString("vsT승"));
+			vsTlose = Integer.parseInt(srs.getString("vsT패"));
+			vsZwin = Integer.parseInt(srs.getString("vsZ승"));
+			vsZlose = Integer.parseInt(srs.getString("vsZ패"));
+			vsPwin = Integer.parseInt(srs.getString("vsP승"));
+			vsPlose = Integer.parseInt(srs.getString("vsP패"));
 			}
 			
 			if(record == true) {
 				win++;
-				int vsTwin=0;
-				int vsZwin=0;
-				int vsPwin=0;
+				
 				
 				if(type.equals("Terran")) {
 					vsTwin++;
@@ -155,9 +185,7 @@ public class sunsu {
 			}
 			else if(record == false){
 				lose++;
-				int vsTlose=0;
-				int vsZlose=0;
-				int vsPlose=0;
+				
 				if(type.equals("Terran")) {
 					vsTlose++;
 					stmt.executeUpdate("update sunsu_data set 패 = "+lose+" where 이름 = '"+name+"'");

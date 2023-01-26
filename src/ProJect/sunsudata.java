@@ -472,11 +472,14 @@ class sunsudata extends JFrame {
 				s.supply2 = s.sunsudb.getSupply();
 				s.control2 = s.sunsudb.getControl();
 				s.type2 = s.sunsudb.getType();
+				s.recon2 = s.sunsudb.getRecon();
+				s.keep2 = s.sunsudb.getKeep();
 
 				s.statlabel2.setVisible(true);
 				s.statlabel2.setText("<html><body><center>공격력: " + s.atk2 + "<br>수비력: " + s.def2 + "<br>전략: "
 						+ s.tectics2 + "<br>센스: " + s.sense2 + "<br>물량: " + s.supply2 + "<br>컨트롤: " + s.control2
-						+ "<br>종족: " + s.type2 + "</center></body></html>");
+						+ "<br>견제: " + s.keep2 + "<br>정찰: " + s.recon2
+						+"<br>종족: " + s.type2 + "</center></body></html>");
 
 				s.statlabel2.setForeground(Color.white);
 				s.statlabel2.setBackground(Color.black);
@@ -506,10 +509,10 @@ class sunsudata extends JFrame {
 			}
 		});
 
-		s.statlabel.setBounds(120, 500, 150, 150);
+		s.statlabel.setBounds(120, 520, 150, 150);
 		c.add(s.statlabel);
 
-		s.statlabel2.setBounds(120, 500, 150, 150);
+		s.statlabel2.setBounds(120, 520, 150, 150);
 		c.add(s.statlabel2);
 		sunsu1.setBounds(120, 380, 100, 100);
 		sunsu1name.setBounds(140, 450, 100, 100);
