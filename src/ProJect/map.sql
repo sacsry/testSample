@@ -2,7 +2,7 @@
 -- Query: SELECT * FROM sampledb.map
 LIMIT 0, 500
 
--- Date: 2023-01-25 17:57
+-- Date: 2023-01-26 14:24
 */
 INSERT INTO `` (`맵이름`,`Terran`,`Z1`,`Zerg`,`P1`,`Protoss`,`T1`) VALUES ('투혼',50,50,50,50,50,50);
 INSERT INTO `` (`맵이름`,`Terran`,`Z1`,`Zerg`,`P1`,`Protoss`,`T1`) VALUES ('써킷브레이커',50,50,50,50,50,50);
