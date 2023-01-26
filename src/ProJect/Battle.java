@@ -74,9 +74,14 @@ public class Battle extends JFrame {
 				new ProjectMain();
 			}
 		});
+		
+		s.draw = new Drawlabel(f);
+		s.draw.setLayout(null);
+		Drawlabel2 draw1 = new Drawlabel2(f);
+		draw1.setLayout(null);
 
-		s.Text.setBounds(460, 330, 300, 500);
-		c.add(s.Text);
+		s.scrollPane.setBounds(460, 330, 300, 500);
+		c.add(s.scrollPane);
 		
 		s.sunsudb.data(sunsu1);
 		s.atk1 = s.sunsudb.getAtk();
@@ -88,20 +93,25 @@ public class Battle extends JFrame {
 		s.type1 = s.sunsudb.getType();
 		s.recon1 = s.sunsudb.getRecon();
 		s.keep1 = s.sunsudb.getKeep();
+		s.grade1 = s.sunsudb.getGrade();
 		s.sum1 = s.atk1 + s.def1 + s.control1 + s.tectics1 + s.sense1 + s.supply1+s.recon1+s.keep1;
 		sum1 = s.sum1;
-
-		s.statlabel.setVisible(true);
+		s.draw.repaint();
 		
-		s.statlabel.setText("<html><body><center>공격력: " + s.atk1 + "<br>수비력: " + s.def1 + "<br>전략: "
-				+ s.tectics1 + "<br>센스: " + s.sense1 + "<br>물량: " + s.supply1 + "<br>컨트롤: " + s.control1
-				+ "<br>견제: " + s.keep1 + "<br>정찰: " + s.recon1
-				+"<br>종족: " + s.type1 + "</center></body></html>");
-
-		s.statlabel.setForeground(Color.white);
-		s.statlabel.setBackground(Color.black);
-		s.statlabel.setBounds(130, 500, 150, 150);
-		c.add(s.statlabel);
+		s.draw.setVisible(true);
+		s.draw.setBounds(70,520,200,200);
+		c.add(s.draw);
+//		s.statlabel.setVisible(true);
+//		
+//		s.statlabel.setText("<html><body><center>공격력: " + s.atk1 + "<br>수비력: " + s.def1 + "<br>전략: "
+//				+ s.tectics1 + "<br>센스: " + s.sense1 + "<br>물량: " + s.supply1 + "<br>컨트롤: " + s.control1
+//				+ "<br>견제: " + s.keep1 + "<br>정찰: " + s.recon1
+//				+"<br>종족: " + s.type1 + "</center></body></html>");
+//
+//		s.statlabel.setForeground(Color.white);
+//		s.statlabel.setBackground(Color.black);
+//		s.statlabel.setBounds(130, 500, 150, 150);
+//		c.add(s.statlabel);
 
 		
 		s.sunsudb.data(sunsu2);
@@ -114,20 +124,25 @@ public class Battle extends JFrame {
 		s.type2 = s.sunsudb.getType();
 		s.recon2 = s.sunsudb.getRecon();
 		s.keep2 = s.sunsudb.getKeep();
+		s.grade2 = s.sunsudb.getGrade();
+		draw1.repaint();
 		
 		
 		s.sum2 = s.atk2 + s.def2 + s.control2 + s.tectics2 + s.sense2 + s.supply2+s.keep2+s.recon2;
 		sum2 = s.sum2;
 
-		s.statlabel2.setText("<html><body><center>공격력: " + s.atk2 + "<br>수비력: " + s.def2 + "<br>전략: "
-				+ s.tectics2 + "<br>센스: " + s.sense2 + "<br>물량: " + s.supply2 + "<br>컨트롤: " + s.control2
-				+ "<br>견제: " + s.keep2 + "<br>정찰: " + s.recon2
-				+"<br>종족: " + s.type2 + "</center></body></html>");
-
-		s.statlabel2.setForeground(Color.white);
-		s.statlabel2.setBackground(Color.black);
-		s.statlabel2.setBounds(970, 500, 150, 150);
-		c.add(s.statlabel2);
+		draw1.setVisible(true);
+		draw1.setBounds(930, 520, 200, 200);
+		c.add(draw1);
+//		s.statlabel2.setText("<html><body><center>공격력: " + s.atk2 + "<br>수비력: " + s.def2 + "<br>전략: "
+//				+ s.tectics2 + "<br>센스: " + s.sense2 + "<br>물량: " + s.supply2 + "<br>컨트롤: " + s.control2
+//				+ "<br>견제: " + s.keep2 + "<br>정찰: " + s.recon2
+//				+"<br>종족: " + s.type2 + "</center></body></html>");
+//
+//		s.statlabel2.setForeground(Color.white);
+//		s.statlabel2.setBackground(Color.black);
+//		s.statlabel2.setBounds(970, 500, 150, 150);
+//		c.add(s.statlabel2);
 
 		s.sum3 = s.sum1 + s.sum2;
 		sum3 = s.sum3;
@@ -353,22 +368,28 @@ public class Battle extends JFrame {
 	    public void run(){
 	    	if(s.wincount == 0) {
 	    	s.Text.append("준플레이오프 "+(s.count1+1)+"경기 시작했습니다.\n");
+	    	s.Text.setCaretPosition(s.Text.getDocument().getLength());
 	    	}
 	    	if(s.wincount == 1) {
 		    	s.Text.append("플레이오프 "+(s.count1+1)+"경기 시작했습니다.\n");
+		    	s.Text.setCaretPosition(s.Text.getDocument().getLength());
 		    }
 	    	if(s.wincount == 2) {
 		    	s.Text.append("결승 "+(s.count1+1)+"경기 시작했습니다.\n");
+		    	s.Text.setCaretPosition(s.Text.getDocument().getLength());
 		    }
 	    	
 	    	if(s.type1.equals("Terran")){
 	    		s.Text.append(sunsu1+" 마린생산후 팩토리 올라갑니다\n");
+	    		s.Text.setCaretPosition(s.Text.getDocument().getLength());
 	    	}
 	    	if(s.type1.equals("Zerg")){
 	    		s.Text.append(sunsu1+" 12드론까지 눌렀어요\n");
+	    		s.Text.setCaretPosition(s.Text.getDocument().getLength());
 	    	}
 	    	if(s.type1.equals("Protoss")){
 	    		s.Text.append(sunsu1+" 질럿 생산후 코어 들어갑니다\n");
+	    		s.Text.setCaretPosition(s.Text.getDocument().getLength());
 	    	}
 	    	winLabel.setVisible(false);
 			loseLabel.setVisible(false);
@@ -382,15 +403,19 @@ public class Battle extends JFrame {
 	                con1.fill();//
 	                if(con1.getBarSize()<20) {
 	                	s.Text.append(sunsu1+" 선수 끝까지 포기하지 않네요\n");
+	                	s.Text.setCaretPosition(s.Text.getDocument().getLength());
 	                }
 	                if(con1.getBarSize()<40) {
 	                	s.Text.append(sunsu1+" 선수 집중해야 합니다.\n");
+	                	s.Text.setCaretPosition(s.Text.getDocument().getLength());
 	                }
 	                if(con1.getBarSize()>60) {
 	                	s.Text.append(sunsu1+" 선수 "+con1.getBarSize()+"% 유리\n");
+	                	s.Text.setCaretPosition(s.Text.getDocument().getLength());
 	                }
 	                if(con1.getBarSize()>80) {
 	                	s.Text.append(sunsu1+" 선수 승기를 잡았어요!\n");
+	                	s.Text.setCaretPosition(s.Text.getDocument().getLength());
 	                }
 	                
 	            }
@@ -435,11 +460,13 @@ public class Battle extends JFrame {
 			}
 			if (s.WIN) {
 			s.Text.append(sunsu1 + "선수 역시 이기는 법을 아는거같아요!");
+			s.Text.setCaretPosition(s.Text.getDocument().getLength());
 			s.wincount1 = wincount + 1;
 			PvP.setText(s.wincount1 + "           :           " + losecount);
 			}
 			if (s.Lose) {
 				s.Text.append(sunsu2 + "선수 역시 이기는 법을 아는거같아요!");
+				s.Text.setCaretPosition(s.Text.getDocument().getLength());
 				s.losecount1 = losecount + 1;
 				PvP.setText(wincount + "           :           " + s.losecount1);
 			}
@@ -471,12 +498,15 @@ public class Battle extends JFrame {
 	    	con2.setBarSize(50);
 	    	if(s.type2.equals("Terran")){
 	    		s.Text.append(sunsu2+" 마린생산후 팩토리 올라갑니다\n");
+	    		s.Text.setCaretPosition(s.Text.getDocument().getLength());
 	    	}
 	    	if(s.type2.equals("Zerg")){
 	    		s.Text.append(sunsu2+" 12드론까지 눌렀어요\n");
+	    		s.Text.setCaretPosition(s.Text.getDocument().getLength());
 	    	}
 	    	if(s.type2.equals("Protoss")){
 	    		s.Text.append(sunsu2+" 질럿 생산후 코어 들어갑니다\n");
+	    		s.Text.setCaretPosition(s.Text.getDocument().getLength());
 	    	}
 			while(con1.getBarSize()<100 && con2.getBarSize()<100){
 				
@@ -486,15 +516,19 @@ public class Battle extends JFrame {
 	                con2.setBarSize(100-con1.getBarSize());
 	                if(con2.getBarSize()<20) {
 	                	s.Text.append(sunsu2+" 선수 끝까지 포기하지 않네요\n");
+	                	s.Text.setCaretPosition(s.Text.getDocument().getLength());
 	                }
 	                if(con2.getBarSize()<40) {
 	                	s.Text.append(sunsu2+" 선수 집중해야 합니다.\n");
+	                	s.Text.setCaretPosition(s.Text.getDocument().getLength());
 	                }
 	                if(con2.getBarSize()>60) {
 	                	s.Text.append(sunsu2+" 선수 "+con1.getBarSize()+"% 유리\n");
+	                	s.Text.setCaretPosition(s.Text.getDocument().getLength());
 	                }
 	                if(con2.getBarSize()>80) {
 	                	s.Text.append(sunsu2+" 선수 승기를 잡았어요!\n");
+	                	s.Text.setCaretPosition(s.Text.getDocument().getLength());
 	                }
 	                con2.paint();
 	                }
@@ -539,24 +573,31 @@ public class Battle extends JFrame {
 	    	if(randomint>6) {
 	    		if(s.type1.equals("Protoss")) {
 	    			s.Text.append(sunsu1+" 선수 절묘한 사이오닉스톰!\n");
+	    			s.Text.setCaretPosition(s.Text.getDocument().getLength());
 	    		}
 	    		if(s.type1.equals("Terran")) {
 	    			s.Text.append(sunsu1+" 선수 마인대박!!!\n");
+	    			s.Text.setCaretPosition(s.Text.getDocument().getLength());
 	    		}
 	    		if(s.type1.equals("Zerg")) {
 	    			s.Text.append(sunsu1+" 선수 병력돌려서 크게 이득봅니다!\n");
+	    			s.Text.setCaretPosition(s.Text.getDocument().getLength());
 	    		}
+	    		
 	    	}
 	    	
 	    	if(randomint<-6) {
 	    		if(s.type2.equals("Protoss")) {
 	    			s.Text.append(sunsu2+" 선수 절묘한 사이오닉스톰!\n");
+	    			s.Text.setCaretPosition(s.Text.getDocument().getLength());
 	    		}
 	    		if(s.type2.equals("Terran")) {
 	    			s.Text.append(sunsu2+" 선수 마인대박!!!\n");
+	    			s.Text.setCaretPosition(s.Text.getDocument().getLength());
 	    		}
 	    		if(s.type2.equals("Zerg")) {
 	    			s.Text.append(sunsu2+" 선수 병력돌려서 크게 이득봅니다!\n");
+	    			s.Text.setCaretPosition(s.Text.getDocument().getLength());
 	    		}
 	    	}
 	        barSize+=(winrate/5+randomint-10);

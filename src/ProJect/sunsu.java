@@ -14,6 +14,15 @@ public class sunsu {
 	int losecount;
 	int recon;
 	int keep;
+	int sum;
+	public int getSum() {
+		return sum;
+	}
+
+	public void setSum(int sum) {
+		this.sum = sum;
+	}
+
 	int vsTwincount;
 	int vsZwincount;
 	int vsPwincount;
@@ -59,6 +68,7 @@ public class sunsu {
 				keep = Integer.parseInt(srs.getString("견제"));
 				recon = Integer.parseInt(srs.getString("정찰"));
 				grade = srs.getString("등급");
+				sum = Integer.parseInt(srs.getString("sum"));
 				wincount = Integer.parseInt(srs.getString("승"));
 				losecount = Integer.parseInt(srs.getString("패"));
 				vsTwincount=Integer.parseInt(srs.getString("vsT승"));;

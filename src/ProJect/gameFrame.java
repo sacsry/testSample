@@ -38,6 +38,10 @@ public class gameFrame extends JFrame{
 			}
 		});
 
+		s.draw = new Drawlabel(f);
+		s.draw.setLayout(null);
+		Drawlabel2 draw1 = new Drawlabel2(f);
+		draw1.setLayout(null);
 		
 		for (int i = 0; i < 5; i++) {
 			s.setbtn[i] = new JButton(s.NewMap.get(i));
@@ -79,12 +83,15 @@ public class gameFrame extends JFrame{
 					s.type1 = s.sunsudb.getType();
 					s.recon1 = s.sunsudb.getRecon();
 					s.keep1 = s.sunsudb.getKeep();
-					s.statlabel.setVisible(true);
-					
-					s.statlabel.setText("<html><body><center>공격력: " + s.atk1 + "<br>수비력: " + s.def1 + "<br>전략: "
-							+ s.tectics1 + "<br>센스: " + s.sense1 + "<br>물량: " + s.supply1 + "<br>컨트롤: " + s.control1
-							+ "<br>견제: " + s.keep1 + "<br>정찰: " + s.recon1
-							+"<br>종족: " + s.type1 + "</center></body></html>");
+					s.grade1 = s.sunsudb.getGrade();
+					s.draw.setVisible(true);
+					s.draw.repaint();
+//					s.statlabel.setVisible(true);
+//					
+//					s.statlabel.setText("<html><body><center>공격력: " + s.atk1 + "<br>수비력: " + s.def1 + "<br>전략: "
+//							+ s.tectics1 + "<br>센스: " + s.sense1 + "<br>물량: " + s.supply1 + "<br>컨트롤: " + s.control1
+//							+ "<br>견제: " + s.keep1 + "<br>정찰: " + s.recon1
+//							+"<br>종족: " + s.type1 + "</center></body></html>");
 
 					
 					s.sunsudb.data(s.Yourentry[a]);
@@ -97,12 +104,15 @@ public class gameFrame extends JFrame{
 					s.type2 = s.sunsudb.getType();
 					s.recon2 = s.sunsudb.getRecon();
 					s.keep2 = s.sunsudb.getKeep();
-					s.statlabel2.setVisible(true);
-					
-					s.statlabel2.setText("<html><body><center>공격력: " + s.atk2 + "<br>수비력: " + s.def2 + "<br>전략: "
-							+ s.tectics2 + "<br>센스: " + s.sense2 + "<br>물량: " + s.supply2 + "<br>컨트롤: " + s.control2
-							+ "<br>견제: " + s.keep2 + "<br>정찰: " + s.recon2
-							+"<br>종족: " + s.type2 + "</center></body></html>");
+					s.grade2 = s.sunsudb.getGrade();
+					draw1.repaint();
+					draw1.setVisible(true);
+//					s.statlabel2.setVisible(true);
+//					
+//					s.statlabel2.setText("<html><body><center>공격력: " + s.atk2 + "<br>수비력: " + s.def2 + "<br>전략: "
+//							+ s.tectics2 + "<br>센스: " + s.sense2 + "<br>물량: " + s.supply2 + "<br>컨트롤: " + s.control2
+//							+ "<br>견제: " + s.keep2 + "<br>정찰: " + s.recon2
+//							+"<br>종족: " + s.type2 + "</center></body></html>");
 
 					s.sunsu1name.setText(s.Myentry[a]);
 					s.sunsu1name.setForeground(Color.white);
@@ -165,17 +175,22 @@ public class gameFrame extends JFrame{
 		s.type1 = s.sunsudb.getType();
 		s.recon1 = s.sunsudb.getRecon();
 		s.keep1 = s.sunsudb.getKeep();
-		s.statlabel.setVisible(true);
-		
-		s.statlabel.setText("<html><body><center>공격력: " + s.atk1 + "<br>수비력: " + s.def1 + "<br>전략: "
-				+ s.tectics1 + "<br>센스: " + s.sense1 + "<br>물량: " + s.supply1 + "<br>컨트롤: " + s.control1
-				+ "<br>견제: " + s.keep1 + "<br>정찰: " + s.recon1
-				+"<br>종족: " + s.type1 + "</center></body></html>");
-
-		s.statlabel.setForeground(Color.white);
-		s.statlabel.setBackground(Color.black);
-		s.statlabel.setBounds(130, 500, 150, 150);
-		c.add(s.statlabel);
+		s.grade1 = s.sunsudb.getGrade();
+		s.draw.repaint();
+		s.draw.setVisible(true);
+		s.draw.setBounds(70, 520, 200, 200);
+		c.add(s.draw);
+//		s.statlabel.setVisible(true);
+//		
+//		s.statlabel.setText("<html><body><center>공격력: " + s.atk1 + "<br>수비력: " + s.def1 + "<br>전략: "
+//				+ s.tectics1 + "<br>센스: " + s.sense1 + "<br>물량: " + s.supply1 + "<br>컨트롤: " + s.control1
+//				+ "<br>견제: " + s.keep1 + "<br>정찰: " + s.recon1
+//				+"<br>종족: " + s.type1 + "</center></body></html>");
+//
+//		s.statlabel.setForeground(Color.white);
+//		s.statlabel.setBackground(Color.black);
+//		s.statlabel.setBounds(130, 500, 150, 150);
+//		c.add(s.statlabel);
 
 		
 		s.sunsudb.data(s.Yourentry[count]);
@@ -188,17 +203,22 @@ public class gameFrame extends JFrame{
 		s.type2 = s.sunsudb.getType();
 		s.recon2 = s.sunsudb.getRecon();
 		s.keep2 = s.sunsudb.getKeep();
-		s.statlabel2.setVisible(true);
-		
-		s.statlabel2.setText("<html><body><center>공격력: " + s.atk2 + "<br>수비력: " + s.def2 + "<br>전략: "
-				+ s.tectics2 + "<br>센스: " + s.sense2 + "<br>물량: " + s.supply2 + "<br>컨트롤: " + s.control2
-				+ "<br>견제: " + s.keep2 + "<br>정찰: " + s.recon2
-				+"<br>종족: " + s.type2 + "</center></body></html>");
-
-		s.statlabel2.setForeground(Color.white);
-		s.statlabel2.setBackground(Color.black);
-		s.statlabel2.setBounds(970, 500, 150, 150);
-		c.add(s.statlabel2);
+		s.grade2 = s.sunsudb.getGrade();
+		draw1.repaint();
+		draw1.setVisible(true);
+		draw1.setBounds(910, 520, 200, 200);
+		c.add(draw1);
+//		s.statlabel2.setVisible(true);
+//		
+//		s.statlabel2.setText("<html><body><center>공격력: " + s.atk2 + "<br>수비력: " + s.def2 + "<br>전략: "
+//				+ s.tectics2 + "<br>센스: " + s.sense2 + "<br>물량: " + s.supply2 + "<br>컨트롤: " + s.control2
+//				+ "<br>견제: " + s.keep2 + "<br>정찰: " + s.recon2
+//				+"<br>종족: " + s.type2 + "</center></body></html>");
+//
+//		s.statlabel2.setForeground(Color.white);
+//		s.statlabel2.setBackground(Color.black);
+//		s.statlabel2.setBounds(970, 500, 150, 150);
+//		c.add(s.statlabel2);
 
 		Map currentMap = new Map();
 		currentMap.data(s.NewMap.get(count));

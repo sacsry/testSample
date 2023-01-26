@@ -65,9 +65,16 @@ class sunsudata extends JFrame {
 		JLabel vsZlabel = new JLabel("b");
 		JLabel vsPlabel = new JLabel("c");
 
-		s.statlabel.setVisible(false);
-		s.statlabel2.setVisible(false);
+//		s.statlabel.setVisible(false);
+//		s.statlabel2.setVisible(false);
+		
+		s.draw = new Drawlabel(f);
+		s.draw.setLayout(null);
+		Drawlabel2 draw1 = new Drawlabel2(f);
+		draw1.setLayout(null);
 
+		s.draw.setVisible(false);
+		draw1.setVisible(false);
 		for (int i = 0; i < 10; i++) {
 			record[i] = new JLabel();
 			sunsupanel.add(record[i]);
@@ -100,8 +107,10 @@ class sunsudata extends JFrame {
 				Object Item = t.getSelectedItem();
 				sunsu1.setVisible(false);
 				sunsu1name.setVisible(false);
-				s.statlabel.setVisible(false);
-				s.statlabel2.setVisible(false);
+//				s.statlabel.setVisible(false);
+//				s.statlabel2.setVisible(false);
+				s.draw.setVisible(false);
+				draw1.setVisible(false);
 				for (int i = 0; i < 10; i++) {
 					record[i].setText("");
 				}
@@ -474,15 +483,18 @@ class sunsudata extends JFrame {
 				s.type2 = s.sunsudb.getType();
 				s.recon2 = s.sunsudb.getRecon();
 				s.keep2 = s.sunsudb.getKeep();
+				s.grade2 = s.sunsudb.getGrade();
+				draw1.repaint();
+				draw1.setVisible(true);
 
-				s.statlabel2.setVisible(true);
-				s.statlabel2.setText("<html><body><center>공격력: " + s.atk2 + "<br>수비력: " + s.def2 + "<br>전략: "
-						+ s.tectics2 + "<br>센스: " + s.sense2 + "<br>물량: " + s.supply2 + "<br>컨트롤: " + s.control2
-						+ "<br>견제: " + s.keep2 + "<br>정찰: " + s.recon2
-						+"<br>종족: " + s.type2 + "</center></body></html>");
-
-				s.statlabel2.setForeground(Color.white);
-				s.statlabel2.setBackground(Color.black);
+//				s.statlabel2.setVisible(true);
+//				s.statlabel2.setText("<html><body><center>공격력: " + s.atk2 + "<br>수비력: " + s.def2 + "<br>전략: "
+//						+ s.tectics2 + "<br>센스: " + s.sense2 + "<br>물량: " + s.supply2 + "<br>컨트롤: " + s.control2
+//						+ "<br>견제: " + s.keep2 + "<br>정찰: " + s.recon2
+//						+"<br>종족: " + s.type2 + "</center></body></html>");
+//
+//				s.statlabel2.setForeground(Color.white);
+//				s.statlabel2.setBackground(Color.black);
 
 				ImageIcon icon = new ImageIcon("images/" + name1 + ".gif");
 
@@ -509,11 +521,15 @@ class sunsudata extends JFrame {
 			}
 		});
 
-		s.statlabel.setBounds(120, 520, 150, 150);
-		c.add(s.statlabel);
+		s.draw.setBounds(60, 540, 200, 200);
+		c.add(s.draw);
+//		s.statlabel.setBounds(120, 520, 150, 150);
+//		c.add(s.statlabel);
 
-		s.statlabel2.setBounds(120, 520, 150, 150);
-		c.add(s.statlabel2);
+		draw1.setBounds(60,540,200,200);
+		c.add(draw1);
+//		s.statlabel2.setBounds(120, 520, 150, 150);
+//		c.add(s.statlabel2);
 		sunsu1.setBounds(120, 380, 100, 100);
 		sunsu1name.setBounds(140, 450, 100, 100);
 

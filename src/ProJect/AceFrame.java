@@ -40,6 +40,12 @@ class AceFrame extends JFrame {
 		acelabel.setBounds(490, 350, 180, 400);
 		c.add(acelabel);
 
+		
+		s.draw = new Drawlabel(f);
+		s.draw.setLayout(null);
+		Drawlabel2 draw1 = new Drawlabel2(f);
+		draw1.setLayout(null);
+		
 		s.sunsupanel.setLayout(null);
 		s.sunsupanel.setBounds(280,330,205,460);
 		s.sunsupanel.add(s.member1JList);
@@ -49,7 +55,9 @@ class AceFrame extends JFrame {
 		
 		s.sunsu1.setBounds(120, 380, 100, 100);
 		s.sunsu1name.setBounds(140, 450, 100, 100);
-		s.statlabel.setBounds(120, 500, 150, 150);
+		s.draw.setBounds(55, 520, 200, 200);
+		draw1.setBounds(910, 520, 200, 200);
+//		s.statlabel.setBounds(120, 500, 150, 150);
 		
 
 		JPanel MapPanel = new JPanel();
@@ -84,8 +92,10 @@ class AceFrame extends JFrame {
 		sunsu1.setIcon(myACEcard);
 		sunsu1name.setText("ACE");
 		sunsu1name.setForeground(Color.white);
-		s.statlabel.setVisible(false);
-		s.statlabel2.setVisible(false);
+		s.draw.setVisible(false);
+		draw1.setVisible(false);
+//		s.statlabel.setVisible(false);
+//		s.statlabel2.setVisible(false);
 		sunsu2.setIcon(myACEcard);
 		sunsu2name.setText("ACE");
 		sunsu2name.setForeground(Color.white);
@@ -96,7 +106,8 @@ class AceFrame extends JFrame {
 				JList jl = (JList) e.getSource();
 				String name = (String) jl.getSelectedValue();
 				String name1 = name.trim();
-				s.statlabel.setVisible(true);
+				s.draw.setVisible(true);
+//				s.statlabel.setVisible(true);
 				s.Myentry[4] = name1;
 				myACEcard = new ImageIcon("images/" + name1 + ".gif");
 
@@ -114,15 +125,18 @@ class AceFrame extends JFrame {
 				s.type1 = s.sunsudb.getType();
 				s.recon1 = s.sunsudb.getRecon();
 				s.keep1 = s.sunsudb.getKeep();
-				s.statlabel.setVisible(true);
+				s.grade1 = s.sunsudb.getGrade();
+				s.draw.repaint();
+				s.draw.setVisible(true);
+//				s.statlabel.setVisible(true);
 				
-				s.statlabel.setText("<html><body><center>공격력: " + s.atk1 + "<br>수비력: " + s.def1 + "<br>전략: "
-						+ s.tectics1 + "<br>센스: " + s.sense1 + "<br>물량: " + s.supply1 + "<br>컨트롤: " + s.control1
-						+ "<br>견제: " + s.keep1 + "<br>정찰: " + s.recon1
-						+"<br>종족: " + s.type1 + "</center></body></html>");
-
-				s.statlabel.setForeground(Color.white);
-				s.statlabel.setBackground(Color.black);
+//				s.statlabel.setText("<html><body><center>공격력: " + s.atk1 + "<br>수비력: " + s.def1 + "<br>전략: "
+//						+ s.tectics1 + "<br>센스: " + s.sense1 + "<br>물량: " + s.supply1 + "<br>컨트롤: " + s.control1
+//						+ "<br>견제: " + s.keep1 + "<br>정찰: " + s.recon1
+//						+"<br>종족: " + s.type1 + "</center></body></html>");
+//
+//				s.statlabel.setForeground(Color.white);
+//				s.statlabel.setBackground(Color.black);
 
 				sunsu1.setIcon(myACEcard);
 				sunsu1name.setText(name1);
@@ -146,7 +160,8 @@ class AceFrame extends JFrame {
 				String name1 = name.trim();
 
 				s.Yourentry[4] = name1;
-				s.statlabel2.setVisible(true);
+				draw1.setVisible(true);
+//				s.statlabel2.setVisible(true);
 				ImageIcon icon = new ImageIcon("images/" + name1 + ".gif");
 
 				sunsu2.setIcon(icon);
@@ -164,15 +179,18 @@ class AceFrame extends JFrame {
 				s.type2 = s.sunsudb.getType();
 				s.recon2 = s.sunsudb.getRecon();
 				s.keep2 = s.sunsudb.getKeep();
-				s.statlabel2.setVisible(true);
-				
-				s.statlabel2.setText("<html><body><center>공격력: " + s.atk2 + "<br>수비력: " + s.def2 + "<br>전략: "
-						+ s.tectics2 + "<br>센스: " + s.sense2 + "<br>물량: " + s.supply2 + "<br>컨트롤: " + s.control2
-						+ "<br>견제: " + s.keep2 + "<br>정찰: " + s.recon2
-						+"<br>종족: " + s.type2 + "</center></body></html>");
-
-				s.statlabel2.setForeground(Color.white);
-				s.statlabel2.setBackground(Color.black);
+				s.grade2 = s.sunsudb.getGrade();
+				draw1.repaint();
+				draw1.setVisible(true);
+////				s.statlabel2.setVisible(true);
+//				
+////				s.statlabel2.setText("<html><body><center>공격력: " + s.atk2 + "<br>수비력: " + s.def2 + "<br>전략: "
+//						+ s.tectics2 + "<br>센스: " + s.sense2 + "<br>물량: " + s.supply2 + "<br>컨트롤: " + s.control2
+//						+ "<br>견제: " + s.keep2 + "<br>정찰: " + s.recon2
+//						+"<br>종족: " + s.type2 + "</center></body></html>");
+//
+//				s.statlabel2.setForeground(Color.white);
+//				s.statlabel2.setBackground(Color.black);
 
 			}
 		});
@@ -228,8 +246,10 @@ class AceFrame extends JFrame {
 		sunsu2.setBounds(960, 380, 100, 100);
 		sunsu2name.setBounds(990, 450, 100, 100);
 		c.add(PvP);
-		c.add(s.statlabel);
-		c.add(s.statlabel2);
+//		c.add(s.statlabel);
+//		c.add(s.statlabel2);
+		c.add(draw1);
+		c.add(s.draw);
 		c.add(sunsu1);
 		c.add(sunsu1name);
 		c.add(sunsu2);

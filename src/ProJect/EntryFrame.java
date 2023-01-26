@@ -35,6 +35,13 @@ public class EntryFrame extends JFrame{
 		
 	
 		ProjectMain s = (ProjectMain)f;
+		
+		s.draw = new Drawlabel(f);
+		s.draw.setLayout(null);
+		Drawlabel2 draw1 = new Drawlabel2(f);
+		draw1.setLayout(null);
+		
+		
 		s.sunsu2.setVisible(false);
 		s.sunsu1.setVisible(false);
 		s.sunsu1name.setText("");
@@ -44,8 +51,10 @@ public class EntryFrame extends JFrame{
 		s.count1 = 0;
 		s.Mapla.setVisible(false);
 		s.Mapdatalabel.setVisible(false);
-		s.statlabel.setVisible(false);
-		s.statlabel2.setVisible(false);
+		s.draw.setVisible(false);
+		draw1.setVisible(false);
+//		s.statlabel.setVisible(false);
+//		s.statlabel2.setVisible(false);
 		s.sunsu2name.setText("");
 		
 		
@@ -89,7 +98,8 @@ public class EntryFrame extends JFrame{
 		
 		s.sunsu1.setBounds(120, 380, 100, 100);
 		s.sunsu1name.setBounds(140, 450, 100, 100);
-		s.statlabel.setBounds(120, 500, 150, 150);
+		s.draw.setBounds(60,510,200,200);
+//		s.statlabel.setBounds(120, 500, 150, 150);
 		///////////////우리팀 엔트리 관련//////////////////////
 		
 //		sunsu2.setBounds(960, 380, 100, 100);
@@ -331,22 +341,27 @@ public class EntryFrame extends JFrame{
 				s.type2 = s.sunsudb.getType();
 				s.recon2 = s.sunsudb.getRecon();
 				s.keep2 = s.sunsudb.getKeep();
-				s.statlabel2.setVisible(true);
+				s.grade2 = s.sunsudb.getGrade();
+				draw1.repaint();
 				
-				s.statlabel2.setText("<html><body><center>공격력: " + s.atk2 + "<br>수비력: " + s.def2 + "<br>전략: "
-						+ s.tectics2 + "<br>센스: " + s.sense2 + "<br>물량: " + s.supply2 + "<br>컨트롤: " + s.control2
-						+ "<br>견제: " + s.keep2 + "<br>정찰: " + s.recon2
-						+"<br>종족: " + s.type2 + "</center></body></html>");
-
-				s.statlabel2.setForeground(Color.white);
-				s.statlabel2.setBackground(Color.black);
+				draw1.setVisible(true);
+//				s.statlabel2.setVisible(true);
+				
+//				s.statlabel2.setText("<html><body><center>공격력: " + s.atk2 + "<br>수비력: " + s.def2 + "<br>전략: "
+//						+ s.tectics2 + "<br>센스: " + s.sense2 + "<br>물량: " + s.supply2 + "<br>컨트롤: " + s.control2
+//						+ "<br>견제: " + s.keep2 + "<br>정찰: " + s.recon2
+//						+"<br>종족: " + s.type2 + "</center></body></html>");
+//
+//				s.statlabel2.setForeground(Color.white);
+//				s.statlabel2.setBackground(Color.black);
 
 			}
 		});
 		
 		s.sunsu2.setBounds(960, 380, 100, 100);
 		s.sunsu2name.setBounds(990, 450, 100, 100);
-		s.statlabel2.setBounds(960, 500, 150, 150);
+//		s.statlabel2.setBounds(960, 500, 150, 150);
+		draw1.setBounds(910,510,200,200);
 		///////////////////////////////상대팀 선수목록 리스트//////////////////////
 		
 		
@@ -400,6 +415,8 @@ public class EntryFrame extends JFrame{
 		/////////////////////////////////////////////////////////////////////
 		add(ItemButton);
 		add(moneylabel);
+		add(s.draw);
+		add(draw1);
 		add(s.sunsupanel);
 		add(sunsupanel1);
 		add(s.sunsu1name);
@@ -413,8 +430,8 @@ public class EntryFrame extends JFrame{
 		add(strBtn1);
 		add(PvP);
 		add(resetbtn);
-		add(s.statlabel);
-		add(s.statlabel2);
+//		add(s.statlabel);
+//		add(s.statlabel2);
 		add(finalLabel);
 		setSize(1200, 1000);
 		setVisible(true);

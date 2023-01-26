@@ -40,7 +40,7 @@ public class ProjectMain extends JFrame {
 	int supply1;
 	int recon1;
 	int keep1;
-	String grade1;
+	String grade1 = "";
 	int sum1;
 	
 	/////////////////우리팀 스탯///////////////////
@@ -55,15 +55,15 @@ public class ProjectMain extends JFrame {
 	int sum2;
 	int recon2;
 	int keep2;
-	String grade2;
+	String grade2 = "";
 	
 	int season = 1;
 	//////////상대선수 스탯////////////////////
 	
-	JLabel statlabel = new JLabel();
-	JLabel statlabel2 = new JLabel();
-	JPanel statpanel = new JPanel();
-	JPanel statpanel2 = new JPanel();
+//	JLabel statlabel = new JLabel();
+//	JLabel statlabel2 = new JLabel();
+	Drawlabel draw;
+	
 	
 	//////////////////////스텟 라벨////////////////
 	JLabel sunsu1 = new JLabel();
@@ -109,6 +109,8 @@ public class ProjectMain extends JFrame {
 	////////////////////////대진표 라벨///////////////////
 
 	JTextArea Text = new JTextArea();
+	JScrollPane scrollPane = new JScrollPane(Text);
+	
 	int grade = 4;
 
 	JPanel sunsupanel = new JPanel();
@@ -147,9 +149,10 @@ public class ProjectMain extends JFrame {
 
 //		statlabel.setBounds(600, 390, 150, 150);
 //		c.add(statlabel);
-		Drawlabel draw = new Drawlabel(this);
+		draw = new Drawlabel(this);
 		draw.setLayout(null);
-		draw.setBounds(600, 450, 300, 300);
+		draw.setBounds(540, 400, 300, 300);
+		draw.setVisible(false);
 //		statpanel.setBackground(Color.black);
 		
 		c.add(draw);
@@ -182,6 +185,9 @@ public class ProjectMain extends JFrame {
 				} catch (IOException e2) {
 					e2.printStackTrace();
 				}
+				System.out.print(Item);
+				ImageIcon icon = new ImageIcon("images/로고/" + Item + ".gif");
+				logolabel.setIcon(icon);
 				ImageIcon icon1 = new ImageIcon("images/" + v.get(0).trim() + ".gif");
 				la1.setIcon(icon1);
 				la2.setText(v.get(0).trim());
@@ -205,7 +211,7 @@ public class ProjectMain extends JFrame {
 //
 //				statlabel.setForeground(Color.white);
 //				statlabel.setBackground(Color.black);
-
+				draw.setVisible(true);
 				Myteam = (String) TeamCombo.getSelectedItem();
 				Teamname.setText(Myteam);
 				
@@ -300,6 +306,7 @@ public class ProjectMain extends JFrame {
 		String name = (String) jl.getSelectedValue();
 		String name1 = name.trim();
 
+		draw.setVisible(true);
 		ImageIcon icon = new ImageIcon("images/" + name1 + ".gif");
 
 		la1.setVisible(true);
@@ -320,7 +327,8 @@ public class ProjectMain extends JFrame {
 		recon1 = sunsudb.getRecon();
 		keep1 = sunsudb.getKeep();
 		grade1 = sunsudb.getGrade();
-		
+		draw.setVisible(true);
+		draw.repaint();
 		
 		
 		
