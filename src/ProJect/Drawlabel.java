@@ -13,11 +13,16 @@ public class Drawlabel extends JPanel {
 	
 	public void paint(Graphics g) {
 		super.paint(g);
+		System.out.println("test");
 		setLayout(null);
 		setBackground(Color.black);
-		gradelabel.setText("");
-		gradelabel.setText(s.grade1);
-		gradelabel.setBounds(45, 45, 20, 20);
+		if(s.grade1 != null) {
+			g.setColor(new Color(0, 0, 255));
+			g.drawString(s.grade1, 45, 45);
+		}
+//		gradelabel.setText("");
+//		gradelabel.setText(s.grade1);
+//		gradelabel.setBounds(45, 45, 20, 20);
 		int[] x_point = {0,10,50,90,100,90,50,10};
 		int[] y_point = {50,85,100,85,50,15,0,15};
 		g.setColor(Color.WHITE);
@@ -42,9 +47,8 @@ public class Drawlabel extends JPanel {
 		g.setColor(Color.red);
 		g.drawPolygon(x_point1,y_point1,x_point1.length);
 		add(gradelabel);
-		repaint();
+//		repaint();
 //		
-		
 		}
 	
 }
