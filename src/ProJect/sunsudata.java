@@ -516,7 +516,12 @@ class sunsudata extends JFrame {
 				s.anotherTeamJList.setVisible(true);
 				setVisible(false);
 				dispose();
+				if(s.tonerment == false) {
 				new YourFrame(f, Myteam);
+				}
+				if(s.tonerment == true) {
+					new YourFrame2(f, Myteam);
+				}
 
 			}
 		});

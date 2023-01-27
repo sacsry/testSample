@@ -67,7 +67,12 @@ class loseFrame extends JFrame {
 				}
 				setVisible(false);
 				dispose();
+				if(s.tonerment == false) {
 				new YourFrame(f,Myteam);
+				}
+				if(s.tonerment == true) {
+					new YourFrame2(f,Myteam);
+				}
 			}
 		});
 		if (grade1 == 1) {

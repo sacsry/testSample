@@ -230,8 +230,28 @@ class AceFrame extends JFrame {
 		PvP.setBounds(360, 0, 600, 200);
 		PvP.setText(2 + "           :           " + 2);
 
+		int k = 0;
+		if(s.wincount == 0) {
+			k = s.num[0];
+		}
+		if(s.wincount == 1) {
+			k = 12;
+		}
+		else if(s.wincount == 2) {
+			k = 18;
+		}
+		else if(s.wincount == 3) {
+			k = 21;
+		}
+
 		ImageIcon team = new ImageIcon("images/로고/" + Myteam + ".gif");
-		ImageIcon team1 = new ImageIcon("images/로고/" + s.NewTeam.get(s.num[s.wincount]) + ".gif");
+		ImageIcon team1 = null;
+		if(s.tonerment == false) {
+			team1 = new ImageIcon("images/로고/" + s.NewTeam.get(s.num[s.wincount]) + ".gif");
+		}
+		if(s.tonerment == true) {
+			team1 = new ImageIcon("images/로고/" + s.NewTeam.get(k) + ".gif");
+		}
 		JLabel myteam = new JLabel();
 		JLabel yourteam = new JLabel();
 		myteam.setIcon(team);

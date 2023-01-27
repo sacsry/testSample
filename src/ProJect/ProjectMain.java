@@ -20,7 +20,8 @@ public class ProjectMain extends JFrame {
 			"웅진 스타즈", "eStrO", "위메이드 FOX", "공군 ACE" };
 	
 	JComboBox<String> TeamCombo = new JComboBox<String>(Team);
-	ArrayList<String> NewTeam;
+	ArrayList<String> NewTeam = new ArrayList<String>();
+	ArrayList<String> NewTeam1;
 	Vector<String> v = new Vector<String>();//// 우리팀 선수목록
 	Vector<String> v1 = new Vector<String>();////상대 팀선수목록
 	JList<String> member1JList = new JList<String>(v);
@@ -86,8 +87,9 @@ public class ProjectMain extends JFrame {
 	///////////////////////세트 승리 및 패배 카운트//////////////////
 	int sum3;
 	
-	int num[] = new int[3];// 랜덤 팀 생성	
+	int num[] = new int[11];// 랜덤 팀 생성	
 	int num2[] = new int[4];///상대 엔트리 랜덤
+	int num3[] = new int[4]; // 컴퓨터 랜덤 엔트리 생성
 	
 	int wincount;///////매치 승리 카운트
 	
@@ -124,6 +126,17 @@ public class ProjectMain extends JFrame {
 	int snipercount;
 	boolean answer;
 	//////////////////////////////////////////////////////////
+	int team1wincount;
+	int team2wincount;
+	int Computerset;
+	int vsTeamnum;
+	
+	boolean tonerment;
+	
+	
+	///////////////////////////컴퓨터 시뮬레이션 배틀////////////////////////////////
+	
+	
 	
 	public ProjectMain(){
 		setTitle("MyStarCraft");
@@ -185,7 +198,7 @@ public class ProjectMain extends JFrame {
 				} catch (IOException e2) {
 					e2.printStackTrace();
 				}
-				System.out.print(Item);
+				
 				ImageIcon icon = new ImageIcon("images/로고/" + Item + ".gif");
 				logolabel.setIcon(icon);
 				ImageIcon icon1 = new ImageIcon("images/" + v.get(0).trim() + ".gif");
@@ -218,7 +231,7 @@ public class ProjectMain extends JFrame {
 			}
 			
 		});
-		JButton strBtn = new JButton("시작");
+		JButton strBtn = new JButton("포스트시즌 모드");
 		
 		JFrame a = this;
 		strBtn.addActionListener(new ActionListener() {
@@ -235,9 +248,41 @@ public class ProjectMain extends JFrame {
 						NewTeam.add(temp);
 				}
 
+				System.out.println(NewTeam);
+				tonerment = false;
 				setVisible(false);
 				dispose();
 				new YourFrame(a, Myteam);
+//				new YourFrame2(a, Myteam);
+				
+				}
+			}
+		});
+		
+		
+		JButton strBtn2 = new JButton("12강 토너먼트");
+		strBtn2.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+
+				
+				if(v.get(0) != null) {
+					randomteam();
+					NewTeam = new ArrayList<String>();
+					for (String temp : Team) {
+						if (!temp.equals(Myteam))
+							NewTeam.add(temp);
+					}
+					
+					
+					System.out.println(NewTeam);
+				tonerment = true;
+				setVisible(false);
+				dispose();
+				
+				new YourFrame2(a, Myteam);
 				
 				}
 			}
@@ -254,7 +299,8 @@ public class ProjectMain extends JFrame {
 		
 		la1.setBounds(600, 200, 200, 200);
 		la2.setBounds(630, 280, 200, 200);
-		strBtn.setBounds(350, 650, 100, 30);
+		strBtn.setBounds(300, 650, 200, 30);
+		strBtn2.setBounds(300,680,200,30);
 		resetBtn.setBounds(0, 0, 50, 50);
 		la.setFont(new Font("팀 선택", Font.ITALIC, 40));
 		la.setForeground(Color.white);
@@ -279,6 +325,7 @@ public class ProjectMain extends JFrame {
 		sunsupanel.add(member1JList);
 		sunsupanel.setBackground(Color.black);
 		sunsupanel.setBorder(new TitledBorder(new LineBorder(Color.white, 3),"선수들",2,0,new Font("",Font.BOLD,20),Color.white));
+		c.add(strBtn2);
 		c.add(sunsupanel);
 		c.add(Teamname);
 //		c.add(member1JList);
@@ -346,7 +393,7 @@ public class ProjectMain extends JFrame {
 	public void randomteam() {
 		Random random = new Random();
 
-		for (int i = 0; i < num.length; i++) {
+		for (int i = 0; i < 11; i++) {
 			num[i] = random.nextInt(11);
 			for (int j = 0; j < i; j++) {
 				if (num[i] == num[j]) {
@@ -363,6 +410,20 @@ public class ProjectMain extends JFrame {
 			num2[i] = random.nextInt(v1.size());
 			for (int j = 0; j < i; j++) {
 				if (num2[i] == num2[j]) {
+					i--;
+					break;
+				}
+			}
+		}
+	}
+	
+	public void randomentry1() {
+		Random random = new Random();
+
+		for (int i = 0; i < num3.length; i++) {
+			num3[i] = random.nextInt(v.size());
+			for (int j = 0; j < i; j++) {
+				if (num3[i] == num3[j]) {
 					i--;
 					break;
 				}

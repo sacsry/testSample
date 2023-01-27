@@ -10,7 +10,7 @@ import javax.swing.border.LineBorder;
 import java.sql.*;
 import java.util.Random;
 
-public class Battle extends JFrame {
+public class twelveBattle extends JFrame {
 	private JButton resetBtn = new JButton("R");
 	private JLabel MysunsuLabel = new JLabel();
 	private JLabel YoursunsuLabel = new JLabel();
@@ -42,7 +42,7 @@ public class Battle extends JFrame {
 	private int winrate ;
 	
 	
-	public Battle(JFrame f,String Myteam, String sunsu1, String sunsu2, int wincount, int losecount, int count) {
+	public twelveBattle(JFrame f,String Myteam, String sunsu1, String sunsu2, int wincount, int losecount, int count) {
 
 		super("Mystarcraft");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -253,7 +253,7 @@ public class Battle extends JFrame {
 					s.ACECARD = "ACE";
 					s.yourACECARD = "ACE";
 
-					if (s.wincount == 3) {
+					if (s.wincount == 4) {
 
 						setVisible(false);
 						dispose();
@@ -266,10 +266,28 @@ public class Battle extends JFrame {
 						}
 						setVisible(false);
 						dispose();
-						new YourFrame(f,Myteam);
-
+						s.NewTeam.add(Myteam);
+						
+						if(s.wincount == 1) {
+							new YourFrame2(f,Myteam);
+							new Battle1(f,Myteam);
+							System.out.println(s.NewTeam);
+							
+							
+						}
+						if(s.wincount == 2) {
+							new YourFrame2(f,Myteam);
+							new Battle2(f,Myteam);
+							System.out.println(s.NewTeam);
+						}
+						if(s.wincount == 3) {
+							new YourFrame2(f,Myteam);
+							s.NewTeam.add(s.NewTeam.get(19));
+							System.out.println(s.NewTeam);
+						}
 					}
 				} else if (s.losecount1 == 3) {
+//					s.NewTeam.add(s.NewTeam.get(s.num[0]));
 					setVisible(false);
 					dispose();
 					new loseFrame(f,Myteam, s.grade);
@@ -311,6 +329,9 @@ public class Battle extends JFrame {
 		sunsu2name.setBounds(990, 450, 100, 100);
 
 		int k = 0;
+		if(s.wincount == 0) {
+			k = s.num[0];
+		}
 		if(s.wincount == 1) {
 			k = 12;
 		}
@@ -636,4 +657,5 @@ public class Battle extends JFrame {
 
 	}
 	
+
 }

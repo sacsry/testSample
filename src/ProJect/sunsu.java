@@ -15,13 +15,7 @@ public class sunsu {
 	int recon;
 	int keep;
 	int sum;
-	public int getSum() {
-		return sum;
-	}
 
-	public void setSum(int sum) {
-		this.sum = sum;
-	}
 
 	int vsTwincount;
 	int vsZwincount;
@@ -83,6 +77,14 @@ public class sunsu {
 		} catch (Exception e1) {
 			System.out.println("JDBC 드라이버 로드 오류");
 		} 
+	}
+	
+	public int getSum() {
+		return sum;
+	}
+
+	public void setSum(int sum) {
+		this.sum = sum;
 	}
 	
 	public int getVsTwincount() {

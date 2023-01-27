@@ -48,6 +48,7 @@ public class YourFrame extends JFrame{
 				// TODO Auto-generated method stub
 				setVisible(false);
 				dispose();
+				
 				new EntryFrame(f,Myteam);
 
 			}
