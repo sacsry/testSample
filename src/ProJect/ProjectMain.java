@@ -138,6 +138,8 @@ public class ProjectMain extends JFrame {
 	
 	
 	
+	Drawlabel draw;
+	
 	public ProjectMain(){
 		setTitle("MyStarCraft");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -159,7 +161,7 @@ public class ProjectMain extends JFrame {
 			winla[i] = new JLabel("");
 			losela[i] = new JLabel("");
 		}/////////////////대진표 스코어 라벨 생성//////////////////
-
+		System.out.println("1");
 //		statlabel.setBounds(600, 390, 150, 150);
 //		c.add(statlabel);
 		draw = new Drawlabel(this);
@@ -227,7 +229,6 @@ public class ProjectMain extends JFrame {
 				draw.setVisible(true);
 				Myteam = (String) TeamCombo.getSelectedItem();
 				Teamname.setText(Myteam);
-				
 			}
 			
 		});
@@ -374,11 +375,16 @@ public class ProjectMain extends JFrame {
 		recon1 = sunsudb.getRecon();
 		keep1 = sunsudb.getKeep();
 		grade1 = sunsudb.getGrade();
+<<<<<<< HEAD
 		draw.setVisible(true);
 		draw.repaint();
 		
 		
 		
+=======
+		
+		draw.repaint();
+>>>>>>> refs/remotes/origin/master
 
 //		statlabel.setVisible(true);
 //		statlabel.setText("<html><body><center>공격력: " + atk1 + "<br>수비력: " + def1 + "<br>전략: " + tectics1
