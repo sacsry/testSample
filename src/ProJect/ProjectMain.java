@@ -138,7 +138,7 @@ public class ProjectMain extends JFrame {
 	
 	
 	
-	Drawlabel draw;
+	
 	
 	public ProjectMain(){
 		setTitle("MyStarCraft");
@@ -375,16 +375,16 @@ public class ProjectMain extends JFrame {
 		recon1 = sunsudb.getRecon();
 		keep1 = sunsudb.getKeep();
 		grade1 = sunsudb.getGrade();
-<<<<<<< HEAD
+
 		draw.setVisible(true);
 		draw.repaint();
 		
 		
 		
-=======
+
 		
 		draw.repaint();
->>>>>>> refs/remotes/origin/master
+
 
 //		statlabel.setVisible(true);
 //		statlabel.setText("<html><body><center>공격력: " + atk1 + "<br>수비력: " + def1 + "<br>전략: " + tectics1
