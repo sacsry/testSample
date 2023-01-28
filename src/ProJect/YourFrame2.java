@@ -123,6 +123,7 @@ public class YourFrame2 extends JFrame {
 			g.drawLine(675, 425, 575, 425);
 			g.drawLine(875, 425, 975, 425);
 			g.drawLine(1075, 425, 975, 425);
+			////수정
 			for (int i = 0; i < 11; i++) {
 				image[i] = new ImageIcon("images/로고/" + s.NewTeam.get(s.num[i]) + ".gif");
 				img[i] = image[i].getImage();
