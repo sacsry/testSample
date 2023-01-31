@@ -275,7 +275,7 @@ public class Battle extends JFrame {
 						System.out.println(s.wincount1);
 						System.out.println(s.losecount1);
 						s.teamdb.record(Myteam, true, s.wincount1, s.losecount1);
-						s.teamdb.record(s.yourteam.get(s.game), false, s.losecount1, s.wincount1);
+						s.teamdb.record(s.yourteam.get(s.week), false, s.losecount1, s.wincount1);
 						s.gamejung = true;
 						new SeasonBattle(f,Myteam);
 						new teamth(f,Myteam);
@@ -302,6 +302,7 @@ public class Battle extends JFrame {
 							s.round++;
 							s.yourteam = new ArrayList<String>();
 							s.randomteam();
+							s.randomleague();
 						}
 					}
 					s.ACECARD = "ACE";
@@ -318,7 +319,7 @@ public class Battle extends JFrame {
 						setVisible(false);
 						dispose();
 						s.teamdb.record(Myteam, false, s.wincount1, s.losecount1);
-						s.teamdb.record(s.yourteam.get(s.game), true, s.losecount1, s.wincount1);
+						s.teamdb.record(s.yourteam.get(s.week), true, s.losecount1, s.wincount1);
 						s.gamejung = true;
 						new SeasonBattle(f,Myteam);
 						new teamth(f,Myteam);
@@ -344,6 +345,7 @@ public class Battle extends JFrame {
 							s.round++;
 							s.yourteam = new ArrayList<String>();
 							s.randomteam();
+							s.randomleague();
 						}
 						
 					}
@@ -405,7 +407,7 @@ public class Battle extends JFrame {
 			team1 = new ImageIcon("images/로고/" + s.NewTeam.get(k) + ".gif");
 		}
 		if(s.seasonmode) {
-			team1 = new ImageIcon("images/로고/" + s.yourteam.get(s.game) + ".gif");
+			team1 = new ImageIcon("images/로고/" + s.yourteam.get(s.week) + ".gif");
 		}
 		JLabel myteam = new JLabel();
 		JLabel yourteam = new JLabel();

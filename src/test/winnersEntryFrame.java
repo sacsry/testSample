@@ -321,7 +321,7 @@ public class winnersEntryFrame extends JFrame {
 				String str;
 				BufferedReader br = new BufferedReader(
 
-						new FileReader("src/" + s.yourteam.get(s.game) + ".txt")); // 불러올
+						new FileReader("src/" + s.yourteam.get(s.week) + ".txt")); // 불러올
 																					// 파일이름
 				s.v1.clear();
 				while ((str = br.readLine()) != null) {
@@ -401,7 +401,7 @@ public class winnersEntryFrame extends JFrame {
 			team1 = new ImageIcon("images/로고/" + s.NewTeam.get(k) + ".gif");
 		}
 		if (s.seasonmode) {
-			team1 = new ImageIcon("images/로고/" + s.yourteam.get(s.game) + ".gif");
+			team1 = new ImageIcon("images/로고/" + s.yourteam.get(s.week) + ".gif");
 		}
 		JLabel yourteam = new JLabel();
 		yourteam.setIcon(team1);

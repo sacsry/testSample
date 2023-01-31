@@ -319,7 +319,7 @@ public class gameFrame extends JFrame{
 			team1 = new ImageIcon("images/로고/" + s.NewTeam.get(k) + ".gif");
 		}
 		if(s.seasonmode) {
-			team1 = new ImageIcon("images/로고/" + s.yourteam.get(s.game) + ".gif");
+			team1 = new ImageIcon("images/로고/" + s.yourteam.get(s.week) + ".gif");
 		}
 		JLabel myteam = new JLabel();
 		JLabel yourteam = new JLabel();

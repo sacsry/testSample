@@ -28,6 +28,7 @@ public class YourFrame3 extends JFrame {
 
 		setResizable(false);
 		
+		System.out.println(Arrays.deepToString(s.array[s.week]));
 		for(int i =0; i<7;i++) {
 			s.setlabel[i] = new JLabel("Hidden");
 			s.Mysunsulabel[i] = new JLabel("Hidden");
