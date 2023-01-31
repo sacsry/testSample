@@ -347,6 +347,8 @@ public class Battle extends JFrame {
 						}
 						
 					}
+					s.ACECARD = "ACE";
+					s.yourACECARD = "ACE";
 				} else {
 					setVisible(false);
 					dispose();
@@ -693,7 +695,7 @@ public class Battle extends JFrame {
 	    			s.Text.setCaretPosition(s.Text.getDocument().getLength());
 	    		}
 	    	}
-	        barSize+=(winrate/5+randomint-10);
+	        barSize+=(winrate/5+randomint-9);
 //	        System.out.println(winrate/5);
 //	        System.out.println(randomint+"랜덤숫자"+winrate);
 //	        System.out.println(barSize);

@@ -23,7 +23,7 @@ public class SeasonBattle extends JFrame {
 
 		ProjectMain s = (ProjectMain) f;
 
-		for (int j = 0; j < 5; j++) {
+		for (int j = 1; j < 6; j++) {
 
 			try {
 				String str;
