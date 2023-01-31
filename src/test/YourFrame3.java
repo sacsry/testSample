@@ -27,6 +27,15 @@ public class YourFrame3 extends JFrame {
 		s.teamdb.array();
 
 		setResizable(false);
+		
+		for(int i =0; i<7;i++) {
+			s.setlabel[i] = new JLabel("Hidden");
+			s.Mysunsulabel[i] = new JLabel("Hidden");
+			s.Yoursunsulabel[i] = new JLabel("Hidden");
+		}
+		s.wincount1 = 0;
+		s.losecount1 = 0;
+		s.count1 = 0;
 
 		JButton resetBtn = new JButton("R");
 		resetBtn.addActionListener(new ActionListener() {
@@ -137,7 +146,11 @@ public class YourFrame3 extends JFrame {
 				// TODO Auto-generated method stub
 				setVisible(false);
 				dispose();
+				if(s.round%3 !=0)
 				new EntryFrame(f, Myteam);
+				if(s.round%3 ==0) {
+				new winnersEntryFrame(f, Myteam, 0,0,0);
+				}
 			}
 		});
 

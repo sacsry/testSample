@@ -101,8 +101,8 @@ public class ProjectMain extends JFrame {
 	sunsu sunsudb = new sunsu();
 	String yourACECARD = "ACE";
 	String ACECARD = "ACE";
-	JLabel[] winLabel1 = new JLabel[6];
-	JLabel[] loseLabel1 = new JLabel[6];
+	JLabel[] winLabel1 = new JLabel[8];
+	JLabel[] loseLabel1 = new JLabel[8];
 	///////////////////////////////////////////////////////
 
 	JLabel[] winla = new JLabel[2];
@@ -147,6 +147,16 @@ public class ProjectMain extends JFrame {
 	JLabel[] seasonwinsetla = new JLabel[11];
 	JLabel[] seasonlosesetla = new JLabel[11];
 	JLabel[] seasonwinla = new JLabel[11];
+	
+	boolean winnersmode;
+	JButton[] setbtn1 = new JButton[7];
+	JLabel[] setlabel = new JLabel[7];
+	JLabel[] Mysunsulabel = new JLabel[7];
+	JLabel[] Yoursunsulabel = new JLabel[7];
+	
+	ImageIcon[] MysunsuImage = new ImageIcon[7];
+	ImageIcon[] YoursunsuImage = new ImageIcon[7];
+	
 
 	//////////////////////////// 시즌모드 변수/////////////////////////////////////
 
@@ -161,7 +171,10 @@ public class ProjectMain extends JFrame {
 		Container c = getContentPane();
 		c.setBackground(Color.black);
 		c.setLayout(null);
+		
+		
 
+	
 		for (int i = 0; i < 11; i++) {
 			seasonwinsetla[i] = new JLabel();
 			seasonlosesetla[i] = new JLabel();
@@ -173,12 +186,14 @@ public class ProjectMain extends JFrame {
 
 		}
 
-		for (int i = 0; i < 6; i++) {
+		for (int i = 0; i < 8; i++) {
 
 			winLabel1[i] = new JLabel("");
 			loseLabel1[i] = new JLabel("");
+			
 		} /////////////////////// 경기 스코어 라벨 생성//////////////
 
+		
 		for (int i = 0; i < 2; i++) {
 			winla[i] = new JLabel("");
 			losela[i] = new JLabel("");
