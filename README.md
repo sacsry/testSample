@@ -55,8 +55,9 @@
 > 
 > ![db활용2](https://github.com/sacsry/portfolio/assets/122505474/828765c6-d105-4a3f-bbd1-b66eb5ef8882) 
 > 
-> 📌 [코드 확인하기](https://github.com/sacsry/testSample/blob/11580a3a7b8ebdde19769f7d9cc5a49e405a1d49/src/ProJect/Recorddata.java)
->![dp활용3](https://github.com/sacsry/testSample/blob/796a808233a320751d06fa91ba03ceee5480483f/src/test/sunsuwinranking.java) 
+> 📌 [코드 확인하기](https://github.com/sacsry/testSample/blob/796a808233a320751d06fa91ba03ceee5480483f/src/test/sunsuwinranking.java)
+>![dp활용3](https://github.com/sacsry/testSample/assets/122505474/b5e5f0ec-62b7-402a-bba0-b6b87e46b266)
+
 >
 > 📌 경기 시뮬레이션
 > 
