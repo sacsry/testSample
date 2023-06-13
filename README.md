@@ -44,12 +44,19 @@
 ![엔트리](https://github.com/sacsry/portfolio/assets/122505474/8cd44fbd-178b-48a9-9821-5d6acdc775a8)
 >
 > 📌db 활용
+> 📌 [코드 확인하기](https://github.com/sacsry/testSample/blob/11580a3a7b8ebdde19769f7d9cc5a49e405a1d49/src/ProJect/Recorddata.java)
+> 📌 [쿼리문](https://github.com/sacsry/testSample/blob/796a808233a320751d06fa91ba03ceee5480483f/src/test/sunsu_data.sql)
+> ![db활용](https://github.com/sacsry/portfolio/assets/122505474/18ba51f9-8633-4026-82e6-5d4976c5aea5)
+>
+>
+> 📌 [코드 확인하기](https://github.com/sacsry/testSample/blob/796a808233a320751d06fa91ba03ceee5480483f/src/test/teamrecord.java)
+> 📌 [쿼리문](https://github.com/sacsry/testSample/blob/796a808233a320751d06fa91ba03ceee5480483f/src/test/teamrecord.sql)
+> 📌 [쿼리문](https://github.com/sacsry/testSample/blob/796a808233a320751d06fa91ba03ceee5480483f/src/test/teamrecord1.sql)
 > 
-> ![db활용](https://github.com/sacsry/portfolio/assets/122505474/18ba51f9-8633-4026-82e6-5d4976c5aea5)📌 [코드 확인하기](https://github.com/sacsry/testSample/blob/11580a3a7b8ebdde19769f7d9cc5a49e405a1d49/src/ProJect/sunsu.java)
+> ![db활용2](https://github.com/sacsry/portfolio/assets/122505474/828765c6-d105-4a3f-bbd1-b66eb5ef8882) 
 > 
-> ![db활용2](https://github.com/sacsry/portfolio/assets/122505474/828765c6-d105-4a3f-bbd1-b66eb5ef8882) 📌 [코드 확인하기](https://github.com/sacsry/testSample/blob/11580a3a7b8ebdde19769f7d9cc5a49e405a1d49/src/ProJect/sunsudata.java)
-> 
->![dp활용3](https://github.com/sacsry/portfolio/assets/122505474/8451d30d-704b-4430-b66b-c61b1c29d952) 📌 [코드 확인하기](https://github.com/sacsry/testSample/blob/11580a3a7b8ebdde19769f7d9cc5a49e405a1d49/src/ProJect/Recorddata.java)
+> 📌 [코드 확인하기](https://github.com/sacsry/testSample/blob/11580a3a7b8ebdde19769f7d9cc5a49e405a1d49/src/ProJect/Recorddata.java)
+>![dp활용3](https://github.com/sacsry/testSample/blob/796a808233a320751d06fa91ba03ceee5480483f/src/test/sunsuwinranking.java) 
 >
 > 📌 경기 시뮬레이션
 > 
