@@ -39,8 +39,8 @@
 ## 4. 개발 과정
 > 초기 과정에선 토너먼트 정도 구현할 계획이었으나 빠르게 개발이 진행되어 한시즌을 돌리는 기능까지 손볼 수 있었다.
 > 
-> 📌 엔트리 제출:
-> 📌 https://github.com/sacsry/testSample/blob/843ea627cd294b21818fe7c8913ad26cba9a26ac/src/ProJect/twelveBattle.java
+> 📌 엔트리 제출
+> 📌 [코드 확인하기](https://github.com/sacsry/testSample/blob/843ea627cd294b21818fe7c8913ad26cba9a26ac/src/ProJect/twelveBattle.java)
 ![엔트리](https://github.com/sacsry/portfolio/assets/122505474/8cd44fbd-178b-48a9-9821-5d6acdc775a8)
 >
 > 📌db 활용
